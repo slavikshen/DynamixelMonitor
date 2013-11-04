@@ -1,4 +1,6 @@
-DynamixelMonitor - ReadMe
+DynamixelMonitor
+
+This project is base on the sample code written by Christian Balkenius (christian.balkenius@lucs.lu.se) from robosavvy (http://goo.gl/WBOhZs).
 
 DynamixelMonitor is a simple application that can control Dynamixel servos through
 a USB2Dynamixel from ROBOTIS and presumably also other USB-to-Serial interfaces.
@@ -9,9 +11,11 @@ only been tested with AX-12+ but should work also with other Dynamixels.
 The interface is written in Cocoa/Objective-C while the communication with the Dynamixel
 servos is borrowed from the Ikaros project (www.ikaros-project.org) and written in C++. .
 
+Currently, I am trying to add javascript to the app in order to control the servos for advance purposes.
+
 This code is distributed under the GPL licence.
 
-Let me know if you find the code useful or want to add features to it.
 
-Christian Balkenius (christian.balkenius@lucs.lu.se)
+
+
 
