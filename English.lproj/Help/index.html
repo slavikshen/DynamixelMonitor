@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>DynamixelMonitor Help</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="AppleTitle" content="DynamixelMonitor Help"/>
+	<meta name="AppleIcon" content="Help/icon.png"/>
+    <style>
+        body {
+            font-family: sans-serif;
+            font-size: 10pt;
+        }
+        h1 {
+            vertical-align: middle;
+        }
+        h2 {
+            font-size:1.2em;
+            padding-top:20px;
+        }
+    </style>
+</head>
+
+<body>
+<h1>
+DynamixelMonitor Help
+</h1>
+<p>
+DynamixelMonitor is a simple application that can control <a href="http://www.robotis.com/zbxe/dynamixel_en">Dynamixel servos</a> through a 
+USB2Dynamixel from <a href="http://www.robotis.com">ROBOTIS</a> and presumably also other USB-to-Serial interfaces. The current version only works with a direct connection to the Dynamixel bus
+for servos set for communication at 1 Mbps (which is the default). The application has only been tested with AX-12+ but should work also with other
+Dynamixels.
+</p>
+
+<p>
+<center><img src="USB2Dynamixel.png"></center>
+<center>USB2Dynamixel</center>
+</p>
+
+<h2>
+Preliminaries
+</h2>
+
+<p>
+The USB2Dynamixel uses an FTDI chip to convert from USB to serial communication.
+The <a href="http://www.ftdichip.com/Drivers/VCP.htm">driver</a> for this chip is not installed by default in OS X and if you do not already have it 
+installed you will need to download them from <a href="http://www.ftdichip.com/">FTDIs homepage</a> (Look for the VCP versions). 
+</p>
+
+<p>
+The name of the serial device needs to be set in the preferences. To determine the name of the device open the Terminal application and write "cd /dev" followed by "ls" when the USB2Dynamixel is connected.
+This will show a very long list of device names and the one for the USB2Dynamixel will be something like "/dev/cu.usbserial-A7005Lxn". Enter this string in the preferences.
+</p>
+
+
+<h2>
+Connecting
+</h2>
+
+<p>
+Press the Connect button below the ID list to connect to the USB2Dynamixel. The application will scan for servos
+(in the range 0-31) on the bus and list them above the button.
+
+</p>
+
+<p>
+<center><img src="connect.png"></center>
+</p>
+
+<h2>
+Controlling the Servos
+</h2>
+
+<p>
+Select a servo from the list to look at the values in its control table. The values are displayed as raw data and translated to correct units.
+The goal position and speed of a servo can be controlled by moving the two sliders to the right. Care is taken by the application to keep the position
+slider in sync with the servo to avoid unexpected rapid movements. The "Moving Speed" sets the speed that will be used when the "Goal Position" slider 
+is moved. When the "Moving Speed" is to the far right, speed control will be disabled (by setting the speed to 0) which will result in a maximal speed.
+</p>
+
+<p>
+<center><img src="sliders.png"></center>
+</p>
+
+
+<h2>
+Turning the servos on and off
+</h2>
+
+<p>
+Each individual servo can be turned on or off with the Torque Enable check box.
+To enable or disable the torque of all servos on the bus, use the Enable and Disable buttons in the Broadcast box.
+</p>
+
+<p>
+<center><img src="broadcast.png"></center>
+</p>
+
+<h2>
+Editing 
+</h2>
+
+<p>
+It is not currently possible to edit any other values than goal position and speed, but this will be added in the next version.
+</p>
+
+<h2>
+Contact 
+</h2>
+
+<p>
+Let me know if you find this program useful.
+</p>
+
+<p>
+Christian Balkenius &lt;christian.balkenius@lucs.lu.se&gt;
+</p>
+
+
+</body>
+</html>
