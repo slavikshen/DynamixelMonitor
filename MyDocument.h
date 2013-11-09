@@ -23,43 +23,33 @@
 
 #import <Cocoa/Cocoa.h>
 
-#include "DynamixelComm.h"
+@class JSWrapper;
 
 @interface MyDocument : NSDocument
-{
-    IBOutlet NSTableView * idList;
-    IBOutlet NSTableView * servoValues;
-    IBOutlet NSButton * connectButton;
 
-    IBOutlet NSLevelIndicator * positionIndicator;
-    IBOutlet NSLevelIndicator * speedIndicator;
-    IBOutlet NSLevelIndicator * loadIndicator;
-    IBOutlet NSLevelIndicator * voltageIndicator;
-    IBOutlet NSLevelIndicator * temperatureIndicator;
+@property(nonatomic,strong) IBOutlet NSTableView * idList;
+@property(nonatomic,strong) IBOutlet NSTableView * servoValues;
+@property(nonatomic,strong) IBOutlet NSButton * connectButton;
 
-    IBOutlet NSSlider * goalPositionSlider;
-    IBOutlet NSSlider * movingSpeedSlider;
+@property(nonatomic,strong) IBOutlet NSLevelIndicator * positionIndicator;
+@property(nonatomic,strong) IBOutlet NSLevelIndicator * speedIndicator;
+@property(nonatomic,strong) IBOutlet NSLevelIndicator * loadIndicator;
+@property(nonatomic,strong) IBOutlet NSLevelIndicator * voltageIndicator;
+@property(nonatomic,strong) IBOutlet NSLevelIndicator * temperatureIndicator;
 
-    IBOutlet NSControl * torqueAuto;
-    IBOutlet NSControl * torqueEnable;
+@property(nonatomic,strong) IBOutlet NSSlider * goalPositionSlider;
+@property(nonatomic,strong) IBOutlet NSSlider * movingSpeedSlider;
 
-    IBOutlet NSControl * torqueEnableButton;
-    IBOutlet NSControl * torqueDisableButton;
-            
-    NSArray * controlTable;
-    NSMutableArray * ID;
-    NSMutableArray * idNumber;
+@property(nonatomic,strong) IBOutlet NSControl * torqueAuto;
+@property(nonatomic,strong) IBOutlet NSControl * torqueEnable;
 
-    DynamixelComm * dc;
-    
-    BOOL    newID;
-    
-    unsigned char servoData[128];
-    NSTimer * timer;
-}
+@property(nonatomic,strong) IBOutlet NSControl * torqueEnableButton;
+@property(nonatomic,strong) IBOutlet NSControl * torqueDisableButton;
+
 
 @property(nonatomic,strong) IBOutlet NSTextView* scriptEditor;
 @property(nonatomic,strong) IBOutlet NSTextView* logView;
+@property(nonatomic,strong) JSWrapper* jsWrapper;
 
 
 - (IBAction)connect:(id)sender;
@@ -71,5 +61,7 @@
 
 - (IBAction)torqueAllEnable:(id)sender;
 - (IBAction)torqueAllDisable:(id)sender;
+
+- (IBAction)runScript:(id)sender;
 
 @end

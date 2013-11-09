@@ -24,31 +24,46 @@
 
 
 #import "MyDocument.h"
-
+#import "MyDocument+JS.h"
+#import "JSWrapper.h"
 #include "DynamixelComm.h"
 
-@implementation MyDocument
-
-
+@implementation MyDocument {
+    
+    
+    NSArray * controlTable;
+    NSMutableArray * ID;
+    NSMutableArray * idNumber;
+    
+    DynamixelComm * dc;
+    
+    BOOL    newID;
+    
+    unsigned char servoData[128];
+    NSTimer * timer;
+    
+    
+}
 
 -(void)timerFire:(NSTimer*)theTimer
 {
-    if(dc && [idList selectedRow] != -1)
-        dc->ReadAllData([[idNumber objectAtIndex: [idList selectedRow]] intValue], servoData);
+    if(dc && [self.idList selectedRow] != -1)
+        dc->ReadAllData([[idNumber objectAtIndex: [self.idList selectedRow]] intValue], servoData);
     [self update: self];
 }
 
-
-
-- (id)init
-{
-    self = [super init];
-    if (self)
-    {
-    }
-    return self;
+- (void)awakeFromNib {
+ 
+    [super awakeFromNib];
+    [self loadJSContext];
+    
 }
 
+- (void) dealloc {
+
+    [self releaseJSContext];
+    
+}
 
 
 - (NSString *)windowNibName
@@ -122,8 +137,7 @@
 
 */
 
-
-- (int)numberOfRowsInTableView:(NSTableView *)tableView
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
     if([tableView tag] == 0)
     {
@@ -132,7 +146,7 @@
     }
     else
     {
-        if([idList selectedRow] == -1)
+        if([self.idList selectedRow] == -1)
             return 0;
         else
             return [controlTable count];
@@ -317,10 +331,10 @@
                 [idNumber addObject: [NSNumber numberWithInt: i]];
             }
         }
-        [idList reloadData];
-        [connectButton setTitle: @"Disconnect"];
-        [torqueEnableButton setEnabled: YES];   // TODO: check first that we have connected
-        [torqueDisableButton setEnabled: YES];
+        [self.idList reloadData];
+        [self.connectButton setTitle: @"Disconnect"];
+        [self.torqueEnableButton setEnabled: YES];   // TODO: check first that we have connected
+        [self.torqueDisableButton setEnabled: YES];
     }
     else
     {
@@ -328,11 +342,11 @@
         delete dc;
         dc = NULL;
         [ID removeAllObjects];
-        [idList reloadData];
-        [connectButton setTitle: @"Connect"];
+        [self.idList reloadData];
+        [self.connectButton setTitle: @"Connect"];
 
-        [torqueEnableButton setEnabled: NO];
-        [torqueDisableButton setEnabled: NO];
+        [self.torqueEnableButton setEnabled: NO];
+        [self.torqueDisableButton setEnabled: NO];
     }
 }
 
@@ -340,38 +354,38 @@
 
 - (void)forceUpdate
 {
-    if(dc && [idList selectedRow] != -1)
-        dc->ReadAllData([[idNumber objectAtIndex: [idList selectedRow]] intValue], servoData);
+    if(dc && [self.idList selectedRow] != -1)
+        dc->ReadAllData([[idNumber objectAtIndex: [self.idList selectedRow]] intValue], servoData);
 
-    [servoValues reloadData];
-    [servoValues display];      // Force redraw
+    [self.servoValues reloadData];
+    [self.servoValues display];      // Force redraw
 
     // Update controls
     
-    if([idList selectedRow] == -1)
+    if([self.idList selectedRow] == -1)
         return;
 
-    [positionIndicator setIntValue: servoData[P_PRESENT_POSITION_L]+256*servoData[P_PRESENT_POSITION_H]];
+    [self.positionIndicator setIntValue: servoData[P_PRESENT_POSITION_L]+256*servoData[P_PRESENT_POSITION_H]];
     
     unsigned int speed = servoData[P_PRESENT_SPEED_L]+256*servoData[P_PRESENT_SPEED_H];
     if(speed < 1024)
-        [speedIndicator setIntValue: speed];
+        [self.speedIndicator setIntValue: speed];
     else
-        [speedIndicator setIntValue: speed-1024];
+        [self.speedIndicator setIntValue: speed-1024];
         
     int load = servoData[P_PRESENT_LOAD_L]+256*servoData[P_PRESENT_LOAD_H];
     if(load >= 1024) load -= 1024;
-    [loadIndicator setIntValue: load];
+    [self.loadIndicator setIntValue: load];
 
-    [voltageIndicator setIntValue: servoData[P_PRESENT_VOLTAGE]];
-    [temperatureIndicator setIntValue: servoData[P_PRESENT_TEMPERATURE]];
+    [self.voltageIndicator setIntValue: servoData[P_PRESENT_VOLTAGE]];
+    [self.temperatureIndicator setIntValue: servoData[P_PRESENT_TEMPERATURE]];
 
     // Move the goal position with the servo if torque is disabled
 
     if(servoData[P_TORQUE_ENABLE] == 0 && dc) //  && [goalTracking  intValue] 
-        [goalPositionSlider setIntValue: servoData[P_PRESENT_POSITION_L]+256*servoData[P_PRESENT_POSITION_H]];
+        [self.goalPositionSlider setIntValue: servoData[P_PRESENT_POSITION_L]+256*servoData[P_PRESENT_POSITION_H]];
 
-    [torqueEnable setIntValue: servoData[P_TORQUE_ENABLE]];
+    [self.torqueEnable setIntValue: servoData[P_TORQUE_ENABLE]];
 
 }
 
@@ -379,31 +393,31 @@
 
 -(void)enableControls:(BOOL)enable
 {
-    [positionIndicator setEnabled: enable];
-    [speedIndicator setEnabled: enable];
-    [loadIndicator setEnabled: enable];
-    [voltageIndicator setEnabled: enable];
-    [temperatureIndicator setEnabled: enable];
+    [self.positionIndicator setEnabled: enable];
+    [self.speedIndicator setEnabled: enable];
+    [self.loadIndicator setEnabled: enable];
+    [self.voltageIndicator setEnabled: enable];
+    [self.temperatureIndicator setEnabled: enable];
 
-    [goalPositionSlider setEnabled: enable];
-    [movingSpeedSlider setEnabled: enable];
+    [self.goalPositionSlider setEnabled: enable];
+    [self.movingSpeedSlider setEnabled: enable];
 
-    [torqueEnable setEnabled: enable];
+    [self.torqueEnable setEnabled: enable];
 
-    [torqueEnableButton setEnabled: enable];
-    [torqueDisableButton setEnabled: enable];
+    [self.torqueEnableButton setEnabled: enable];
+    [self.torqueDisableButton setEnabled: enable];
     
     if(!enable)
     {
-        [positionIndicator setIntValue: 0];
-        [speedIndicator setIntValue: 0];
-        [loadIndicator  setIntValue: 0];
-        [voltageIndicator setIntValue: 0];
-        [temperatureIndicator setIntValue: 0];
+        [self.positionIndicator setIntValue: 0];
+        [self.speedIndicator setIntValue: 0];
+        [self.loadIndicator  setIntValue: 0];
+        [self.voltageIndicator setIntValue: 0];
+        [self.temperatureIndicator setIntValue: 0];
 
-        [goalPositionSlider setIntValue: 0];
+        [self.goalPositionSlider setIntValue: 0];
 
-        [torqueEnable setIntValue: 0];
+        [self.torqueEnable setIntValue: 0];
     }
 }
 
@@ -411,9 +425,9 @@
 
 - (IBAction)update:(id)sender
 {
-    [servoValues reloadData];
+    [self.servoValues reloadData];
     
-    if([idList selectedRow] == -1)
+    if([self.idList selectedRow] == -1)
     {
         [self enableControls: NO];
         return;
@@ -421,28 +435,28 @@
     
     [self enableControls: YES];
 
-    [positionIndicator setIntValue: servoData[P_PRESENT_POSITION_L]+256*servoData[P_PRESENT_POSITION_H]];
+    [self.positionIndicator setIntValue: servoData[P_PRESENT_POSITION_L]+256*servoData[P_PRESENT_POSITION_H]];
     
     unsigned int speed = servoData[P_PRESENT_SPEED_L]+256*servoData[P_PRESENT_SPEED_H];
     if(speed < 1024)
-        [speedIndicator setIntValue: speed];
+        [self.speedIndicator setIntValue: speed];
     else
-        [speedIndicator setIntValue: speed-1024];
+        [self.speedIndicator setIntValue: speed-1024];
         
     int load = servoData[P_PRESENT_LOAD_L]+256*servoData[P_PRESENT_LOAD_H];
     if(load >= 1024) load -= 1024;
-    [loadIndicator setIntValue: load];
+    [self.loadIndicator setIntValue: load];
     
-    [voltageIndicator setIntValue: servoData[P_PRESENT_VOLTAGE]];
-    [temperatureIndicator setIntValue: servoData[P_PRESENT_TEMPERATURE]];
+    [self.voltageIndicator setIntValue: servoData[P_PRESENT_VOLTAGE]];
+    [self.temperatureIndicator setIntValue: servoData[P_PRESENT_TEMPERATURE]];
 
     // Move the goal position with the servo if torque is disabled
     // or new ID is selected
 
     if((servoData[P_TORQUE_ENABLE] == 0 || newID) && dc)
-        [goalPositionSlider setIntValue: servoData[P_PRESENT_POSITION_L]+256*servoData[P_PRESENT_POSITION_H]];
+        [self.goalPositionSlider setIntValue: servoData[P_PRESENT_POSITION_L]+256*servoData[P_PRESENT_POSITION_H]];
 
-    [torqueEnable setIntValue: servoData[P_TORQUE_ENABLE]];
+    [self.torqueEnable setIntValue: servoData[P_TORQUE_ENABLE]];
     
     newID = NO;
 }
@@ -451,19 +465,19 @@
 
 - (IBAction)setGoalPosition:(id)sender
 {
-    int p = [goalPositionSlider intValue];
-    int s = [movingSpeedSlider intValue];
+    int p = [self.goalPositionSlider intValue];
+    int s = [self.movingSpeedSlider intValue];
     if(s == 1024) s = 0; // set maximum speed (no speed control) for maximal value
-    dc->Move([[idNumber objectAtIndex: [idList selectedRow]] intValue], p, s);
+    dc->Move([[idNumber objectAtIndex: [self.idList selectedRow]] intValue], p, s);
 }
 
 
 
 - (IBAction)setSpeed:(id)sender
 {
-    int s = [movingSpeedSlider intValue];
+    int s = [self.movingSpeedSlider intValue];
     if(s == 1024) s = 0; // set maximum speed (no speed control) for maximum value
-    dc->SetSpeed([[idNumber objectAtIndex: [idList selectedRow]] intValue], s);
+    dc->SetSpeed([[idNumber objectAtIndex: [self.idList selectedRow]] intValue], s);
     
     [self forceUpdate];
 }
@@ -472,7 +486,7 @@
 
 - (IBAction)toggleTorque:(id)sender
 {
-    dc->SetTorque([[idNumber objectAtIndex: [idList selectedRow]] intValue], [sender intValue]);
+    dc->SetTorque([[idNumber objectAtIndex: [self.idList selectedRow]] intValue], [sender intValue]);
 }
 
 
@@ -493,11 +507,11 @@
 
 - (void) tableViewSelectionDidChange: (NSNotification *) notification
 {
-    int row;
+    NSInteger row;
 
-    if([notification object] == idList)
+    if([notification object] == self.idList)
     {
-        row = [idList selectedRow];
+        row = [self.idList selectedRow];
 
         if (row == -1) {
             //
@@ -509,5 +523,11 @@
     }
 }
 
+- (IBAction)runScript:(id)sender {
+    
+    NSString* js = [[self.scriptEditor textStorage] string];
+    [self evalScript:js];
+    
+}
 
 @end
