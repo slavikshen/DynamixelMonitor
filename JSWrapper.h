@@ -8,6 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+@class LogTextView;
+
 @interface JSWrapper : NSObject
+
+@property(nonatomic,strong) LogTextView* logView;
+@property(nonatomic,strong) JSContext* jsContext;
+
+- (void)evalScript:(NSString*)log;
+
++ (JSWrapper*)sharedInstance;
 
 @end

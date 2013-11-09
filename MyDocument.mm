@@ -525,7 +525,8 @@
 
 - (IBAction)runScript:(id)sender {
     
-    NSString* js = [[self.scriptEditor textStorage] string];
+    NSString* js = [NSString stringWithString:[[self.scriptEditor textStorage] string]];
+//    NSString* js = [[self.scriptEditor textStorage] string];
     [self evalScript:js];
     
 }
