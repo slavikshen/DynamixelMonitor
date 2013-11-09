@@ -27,11 +27,6 @@
 
 #include "IKAROS_System.h"      // FIXME: IKAROS.h in original from Ikaros project
 
-#include <cstdlib>
-#include <cstdio>
-
-
-
 class SerialException
 {
 public:

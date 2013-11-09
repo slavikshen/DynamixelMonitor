@@ -23,7 +23,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface Controller : NSObject {
+@interface Controller : NSObject<NSApplicationDelegate> {
 }
 
 @property (assign) IBOutlet NSTextField *myTextField;

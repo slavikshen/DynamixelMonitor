@@ -28,6 +28,10 @@
 #include "DynamixelComm.h"
 
 
+#include <cstdlib>
+#include <cstdio>
+
+
 DynamixelComm::DynamixelComm(const char * serial_device, unsigned long baud_rate):
     Serial(serial_device, baud_rate)
 {

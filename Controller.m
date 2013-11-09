@@ -21,6 +21,7 @@
 //
 
 #import "Controller.h"
+#import "JSWrapper.h"
 
 @implementation Controller
 
@@ -33,6 +34,7 @@
     NSString *string = [defaults stringForKey:myKey];
     if (string == nil) string = defaultValue;
     [self.myTextField setStringValue:string];
+    
 }
 
 

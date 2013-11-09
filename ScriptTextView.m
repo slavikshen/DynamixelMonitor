@@ -24,6 +24,8 @@
     self.backgroundColor = [NSColor whiteColor];
     self.textColor = [NSColor textColor];
     self.font = [NSFont systemFontOfSize:14];
+    [self setAutomaticQuoteSubstitutionEnabled:NO];
+    [self setAutomaticTextReplacementEnabled:NO];
     
 }
 

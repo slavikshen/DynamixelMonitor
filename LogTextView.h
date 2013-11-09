@@ -8,6 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface LogTextView : NSTextView
+@protocol LogTextViewExport <JSExport>
+
+-(void)log:(NSString*)string;
+
+@end
+
+@interface LogTextView : NSTextView<LogTextViewExport>
 
 @end
