@@ -1,4 +1,7 @@
+
 DynamixelMonitor
+
+# Intro
 
 This project is base on the sample code written by Christian Balkenius (christian.balkenius@lucs.lu.se) from robosavvy (http://goo.gl/WBOhZs).
 
@@ -15,7 +18,29 @@ Currently, I am trying to add javascript to the app in order to control the serv
 
 This code is distributed under the GPL licence.
 
+# What you need to run this project
+
+1 USB2Dynamixel adaptor
+2 Dynamixel Servos
+3 Battery to power your servos
+
+# How to use javascript
+
+There are two object for developer
+
+console &
+D
+
+The console object is the same as the one in web browser.  It can be used to output debug message.
+
+The D object is used to represent the dynamixel servo controller.
+It implement the serial port commnunication protocol to control the servos.
+
+To change the servo postion
+
+D.setPositionOfServo( position, servo_id );
 
 
+You can check the DynamxielJSExport protocol for more js functions.
 
 
