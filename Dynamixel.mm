@@ -7,7 +7,9 @@
 //
 
 #import "Dynamixel.h"
+#import "JSTimer.h"
 #include "DynamixelComm.h"
+
 
 @implementation ServoInfo {
  
@@ -56,13 +58,14 @@
 @property(nonatomic,readwrite,getter = isConnected) BOOL connected;
 @property(nonatomic,readwrite,getter = isTorqueEnabled) BOOL torqueEnabled;
 
+@property(nonatomic,strong) NSMutableDictionary* timers;
+@property(nonatomic,assign) NSInteger lastTimerIndex;
+
 @end
 
 @implementation Dynamixel {
     
     DynamixelComm * dc;
-    
-    BOOL    newID;
     
 }
 
@@ -79,6 +82,7 @@
 
 - (void)_setup {
     self.servos = [NSMutableDictionary dictionaryWithCapacity:128];
+    self.timers = [NSMutableDictionary dictionaryWithCapacity:128];
 }
 
 
@@ -229,6 +233,42 @@
 
 - (NSInteger)numberOfServos {
     return self.allDynamixelServos.count;
+}
+
+- (void)clearAllTimer {
+    
+    NSArray* allKeys = [self.timers allKeys];
+    for( NSNumber* k in allKeys ) {
+        JSTimer* timer = [self.timers objectForKey:k];
+        [timer stop];
+    }
+    
+    [self.timers removeAllObjects];
+}
+
+- (NSInteger)setInterval:(NSTimeInterval)intervale block:(JSValue*)block {
+    
+    NSInteger tid = self.lastTimerIndex+1;
+    self.lastTimerIndex = tid;
+    
+    JSTimer* timer = [[JSTimer alloc]init];
+    timer.callback = block;
+    timer.interval = intervale/1000;
+    timer.repeat = YES;
+    
+    self.timers[@(tid)] = timer;
+    [timer start];
+    
+    return tid;
+}
+
+- (void)clearInterval:(NSInteger)intervalId {
+    
+    NSNumber* key = @(intervalId);
+    JSTimer* timer = self.timers[key];
+    [timer stop];
+    [self.timers removeObjectForKey:key];
+    
 }
 
 @end

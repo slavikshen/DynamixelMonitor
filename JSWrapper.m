@@ -10,6 +10,7 @@
 #import "WebView+LoadBundle.h"
 #import "LogTextView.h"
 #import "Console.h"
+#import "Dynamixel.h"
 
 @implementation JSWrapper
 
@@ -34,6 +35,15 @@
 - (void)_setup {
 
     JSContext* context = [[JSContext alloc] init];
+    context.exceptionHandler = ^(JSContext *context, JSValue *exception) {
+        NSLog(@"JS Exception\n%@",exception);
+    };
+    
+    __block JSWrapper* s = self;
+    context[@"setInterval"] = ^(JSValue* block, float interval) {
+        NSLog(@"function callback\n%@", block);
+        return [s.dynamixel setInterval:interval block:block];
+    };
     self.jsContext = context;
     
 //    context[@"console"] = [[Console alloc] init];
@@ -51,14 +61,22 @@
     _dynamixel = dynamixel;
     self.jsContext[@"D"] = dynamixel;
     self.jsContext[@"Dynamxil"] = dynamixel;
+    self.jsContext[@"window"] = dynamixel;
 }
 
 
 - (void)evalScript:(NSString*)script {
     
+    [self.dynamixel clearAllTimer];
     NSLog(@"eval script\n%@",script);
     id ret = [self.jsContext evaluateScript:script];
     NSLog(@"js ret\n%@", ret);
+}
+
+- (void)stopScript {
+
+    [self.dynamixel clearAllTimer];
+    
 }
 
 //-(void)log:(NSString*)string {

@@ -46,6 +46,10 @@
 - (BOOL)isConnected;
 - (BOOL)isTorqueEnabled;
 
+- (void)clearAllTimer;
+- (NSInteger)setInterval:(NSTimeInterval)intervale block:(JSValue*)block;
+- (void)clearInterval:(NSInteger)intervalId;
+
 @end
 
 @interface Dynamixel : NSObject<DynamxielJSExport>
@@ -56,6 +60,5 @@
 @property(nonatomic,strong) NSMutableDictionary* servos;
 @property(nonatomic,readonly,strong) NSArray* allDynamixelServos;
 @property(nonatomic,readonly,assign) NSInteger numberOfServos;
-
 
 @end

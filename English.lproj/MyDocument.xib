@@ -421,10 +421,42 @@
                                                                     <size key="minSize" width="402" height="273"/>
                                                                     <size key="maxSize" width="463" height="10000000"/>
                                                                     <attributedString key="textStorage">
-                                                                        <fragment content="console.log('Robot Started');">
+                                                                        <fragment>
+                                                                            <string key="content">var pos=512;
+var step=300;
+var servoID=1;
+
+console.log('start timer');
+setInterval( function() {
+
+	console.log(pos);
+D.setSpeedOfServo( 1000, servoID );
+	D.setPositionOfServo( pos, servoID );
+	pos+=step;
+
+	if( pos &gt;= 812  || pos &lt;= 212 ) {
+		step = -step;
+	} 
+
+},1000);</string>
                                                                             <attributes>
-                                                                                <font key="NSFont" metaFont="toolTip"/>
-                                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                                                <font key="NSFont" size="14" name="Menlo-Regular"/>
+                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
+                                                                                    <tabStops>
+                                                                                        <textTab alignment="left" location="36"/>
+                                                                                        <textTab alignment="left" location="72"/>
+                                                                                        <textTab alignment="left" location="108"/>
+                                                                                        <textTab alignment="left" location="144"/>
+                                                                                        <textTab alignment="left" location="180"/>
+                                                                                        <textTab alignment="left" location="216"/>
+                                                                                        <textTab alignment="left" location="252"/>
+                                                                                        <textTab alignment="left" location="288"/>
+                                                                                        <textTab alignment="left" location="324"/>
+                                                                                        <textTab alignment="left" location="360"/>
+                                                                                        <textTab alignment="left" location="396"/>
+                                                                                        <textTab alignment="left" location="432"/>
+                                                                                    </tabStops>
+                                                                                </paragraphStyle>
                                                                             </attributes>
                                                                         </fragment>
                                                                     </attributedString>
@@ -475,6 +507,17 @@ DQ
                                                                     </buttonCell>
                                                                     <connections>
                                                                         <action selector="connect:" target="-1" id="100161"/>
+                                                                    </connections>
+                                                                </button>
+                                                                <button verticalHuggingPriority="750" id="jAW-px-lTL">
+                                                                    <rect key="frame" x="245" y="3" width="69" height="32"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <buttonCell key="cell" type="push" title="Stop" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="hl0-Q6-74y">
+                                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                        <font key="font" metaFont="system"/>
+                                                                    </buttonCell>
+                                                                    <connections>
+                                                                        <action selector="stopScript:" target="-1" id="IcA-k3-A66"/>
                                                                     </connections>
                                                                 </button>
                                                             </subviews>

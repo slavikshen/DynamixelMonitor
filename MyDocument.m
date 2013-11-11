@@ -456,6 +456,10 @@
     
 }
 
+- (IBAction)stopScript:(id)sender {
+    [self.jsWrapper stopScript];
+}
+
 - (void)loadJSContext {
     
     JSWrapper* wrapper = [[JSWrapper alloc] init];

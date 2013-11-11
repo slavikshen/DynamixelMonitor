@@ -62,5 +62,6 @@
 - (IBAction)torqueAllDisable:(id)sender;
 
 - (IBAction)runScript:(id)sender;
+- (IBAction)stopScript:(id)sender;
 
 @end

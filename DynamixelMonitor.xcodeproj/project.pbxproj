@@ -22,6 +22,7 @@
 		6D940639182E0A2300A01ADB /* MyDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D940636182E0A2300A01ADB /* MyDocument.m */; };
 		6D94063D182E0AE200A01ADB /* Console.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D94063C182E0AE200A01ADB /* Console.m */; };
 		6DCCFED5182E2B9800D4E0C3 /* Dynamixel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DCCFED4182E2B9800D4E0C3 /* Dynamixel.mm */; };
+		6DCCFED81830B8FA00D4E0C3 /* JSTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DCCFED71830B8FA00D4E0C3 /* JSTimer.m */; };
 		8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */; };
 		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
 		8D15AC320486D014006FF6A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4B0FDCFA73011CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
@@ -65,6 +66,8 @@
 		6D94063C182E0AE200A01ADB /* Console.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Console.m; sourceTree = "<group>"; };
 		6DCCFED3182E2B9800D4E0C3 /* Dynamixel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dynamixel.h; sourceTree = "<group>"; };
 		6DCCFED4182E2B9800D4E0C3 /* Dynamixel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Dynamixel.mm; sourceTree = "<group>"; };
+		6DCCFED61830B8FA00D4E0C3 /* JSTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSTimer.h; sourceTree = "<group>"; };
+		6DCCFED71830B8FA00D4E0C3 /* JSTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSTimer.m; sourceTree = "<group>"; };
 		8D15AC360486D014006FF6A4 /* DynamixelMonitor-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DynamixelMonitor-Info.plist"; sourceTree = "<group>"; };
 		8D15AC370486D014006FF6A4 /* DynamixelMonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DynamixelMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -135,6 +138,8 @@
 				6D94063C182E0AE200A01ADB /* Console.m */,
 				6DCCFED3182E2B9800D4E0C3 /* Dynamixel.h */,
 				6DCCFED4182E2B9800D4E0C3 /* Dynamixel.mm */,
+				6DCCFED61830B8FA00D4E0C3 /* JSTimer.h */,
+				6DCCFED71830B8FA00D4E0C3 /* JSTimer.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -253,6 +258,7 @@
 				6D7637791828367400191B53 /* JSWrapper.m in Sources */,
 				2250F1C7117FC6EE00B6E6D3 /* DynamixelComm.cc in Sources */,
 				6D36490C18273DBD009365FF /* LogTextView.m in Sources */,
+				6DCCFED81830B8FA00D4E0C3 /* JSTimer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

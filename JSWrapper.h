@@ -17,9 +17,12 @@
 @property(nonatomic,strong) JSContext* jsContext;
 @property(nonatomic,strong) Dynamixel* dynamixel;
 
-- (void)evalScript:(NSString*)log;
+- (void)evalScript:(NSString*)script;
+- (void)stopScript;
 
 + (JSWrapper*)sharedInstance;
+
+
 
 
 @end
