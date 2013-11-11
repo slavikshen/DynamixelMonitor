@@ -19,9 +19,9 @@
 		6D7637761828365400191B53 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D7637751828365400191B53 /* JavaScriptCore.framework */; };
 		6D7637791828367400191B53 /* JSWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7637781828367400191B53 /* JSWrapper.m */; };
 		6D7637821828BE1C00191B53 /* console.html in Resources */ = {isa = PBXBuildFile; fileRef = 6D7637811828BE1C00191B53 /* console.html */; };
-		6D940639182E0A2300A01ADB /* MyDocument.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D940636182E0A2300A01ADB /* MyDocument.mm */; };
-		6D94063A182E0A2300A01ADB /* MyDocument+JS.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D940638182E0A2300A01ADB /* MyDocument+JS.m */; };
+		6D940639182E0A2300A01ADB /* MyDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D940636182E0A2300A01ADB /* MyDocument.m */; };
 		6D94063D182E0AE200A01ADB /* Console.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D94063C182E0AE200A01ADB /* Console.m */; };
+		6DCCFED5182E2B9800D4E0C3 /* Dynamixel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DCCFED4182E2B9800D4E0C3 /* Dynamixel.mm */; };
 		8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */; };
 		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
 		8D15AC320486D014006FF6A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4B0FDCFA73011CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
@@ -60,11 +60,11 @@
 		6D7637781828367400191B53 /* JSWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSWrapper.m; sourceTree = "<group>"; };
 		6D7637811828BE1C00191B53 /* console.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = console.html; sourceTree = "<group>"; };
 		6D940635182E0A2300A01ADB /* MyDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyDocument.h; sourceTree = "<group>"; };
-		6D940636182E0A2300A01ADB /* MyDocument.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MyDocument.mm; sourceTree = "<group>"; };
-		6D940637182E0A2300A01ADB /* MyDocument+JS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MyDocument+JS.h"; sourceTree = "<group>"; };
-		6D940638182E0A2300A01ADB /* MyDocument+JS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MyDocument+JS.m"; sourceTree = "<group>"; };
+		6D940636182E0A2300A01ADB /* MyDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyDocument.m; sourceTree = "<group>"; };
 		6D94063B182E0AE200A01ADB /* Console.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Console.h; sourceTree = "<group>"; };
 		6D94063C182E0AE200A01ADB /* Console.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Console.m; sourceTree = "<group>"; };
+		6DCCFED3182E2B9800D4E0C3 /* Dynamixel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dynamixel.h; sourceTree = "<group>"; };
+		6DCCFED4182E2B9800D4E0C3 /* Dynamixel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Dynamixel.mm; sourceTree = "<group>"; };
 		8D15AC360486D014006FF6A4 /* DynamixelMonitor-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DynamixelMonitor-Info.plist"; sourceTree = "<group>"; };
 		8D15AC370486D014006FF6A4 /* DynamixelMonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DynamixelMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -122,9 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				6D940635182E0A2300A01ADB /* MyDocument.h */,
-				6D940636182E0A2300A01ADB /* MyDocument.mm */,
-				6D940637182E0A2300A01ADB /* MyDocument+JS.h */,
-				6D940638182E0A2300A01ADB /* MyDocument+JS.m */,
+				6D940636182E0A2300A01ADB /* MyDocument.m */,
 				22293AB6116E973300183C8B /* Controller.h */,
 				22293AB7116E973300183C8B /* Controller.m */,
 				6D36490A18273DBD009365FF /* LogTextView.h */,
@@ -135,6 +133,8 @@
 				6D7637781828367400191B53 /* JSWrapper.m */,
 				6D94063B182E0AE200A01ADB /* Console.h */,
 				6D94063C182E0AE200A01ADB /* Console.m */,
+				6DCCFED3182E2B9800D4E0C3 /* Dynamixel.h */,
+				6DCCFED4182E2B9800D4E0C3 /* Dynamixel.mm */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -244,15 +244,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D36490F18273DED009365FF /* ScriptTextView.m in Sources */,
+				6DCCFED5182E2B9800D4E0C3 /* Dynamixel.mm in Sources */,
 				8D15AC320486D014006FF6A4 /* main.m in Sources */,
-				6D940639182E0A2300A01ADB /* MyDocument.mm in Sources */,
+				6D940639182E0A2300A01ADB /* MyDocument.m in Sources */,
 				22293AB8116E973300183C8B /* Controller.m in Sources */,
 				2250F13E117E2E0900B6E6D3 /* IKAROS_Serial_BSD.cc in Sources */,
 				6D94063D182E0AE200A01ADB /* Console.m in Sources */,
 				6D7637791828367400191B53 /* JSWrapper.m in Sources */,
 				2250F1C7117FC6EE00B6E6D3 /* DynamixelComm.cc in Sources */,
 				6D36490C18273DBD009365FF /* LogTextView.m in Sources */,
-				6D94063A182E0A2300A01ADB /* MyDocument+JS.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

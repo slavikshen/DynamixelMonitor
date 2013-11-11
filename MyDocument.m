@@ -24,37 +24,37 @@
 
 
 #import "MyDocument.h"
-#import "MyDocument+JS.h"
 #import "JSWrapper.h"
-#include "DynamixelComm.h"
+#import "Dynamixel.h"
+
+@interface MyDocument()
+
+@property(nonatomic,strong) Dynamixel* dynamixel;
+
+@end
 
 @implementation MyDocument {
     
     
     NSArray * controlTable;
-    NSMutableArray * ID;
-    NSMutableArray * idNumber;
-    
-    DynamixelComm * dc;
-    
-    BOOL    newID;
-    
-    unsigned char servoData[128];
     NSTimer * timer;
     
+    BOOL newID;
     
 }
 
+
+
 -(void)timerFire:(NSTimer*)theTimer
 {
-    if(dc && [self.idList selectedRow] != -1)
-        dc->ReadAllData([[idNumber objectAtIndex: [self.idList selectedRow]] intValue], servoData);
-    [self update: self];
+    [self forceUpdate];
 }
 
 - (void)awakeFromNib {
  
     [super awakeFromNib];
+    Dynamixel* d = [[Dynamixel alloc] init];
+    self.dynamixel = d;
     [self loadJSContext];
     
 }
@@ -87,13 +87,6 @@
     NSString *path = [bundle pathForResource: @"AX12" ofType: @"plist"];   // The AX12 file is currently used for all servo types (they all seem to be the same)
         
     controlTable = [NSArray arrayWithContentsOfFile: path];
-    
-    ID = [NSMutableArray arrayWithCapacity: 128];
-    idNumber = [NSMutableArray arrayWithCapacity: 128];
-
-
-    dc = NULL;
-    newID = NO;
 
     timer = [NSTimer scheduledTimerWithTimeInterval:0.1
         target:self
@@ -139,18 +132,7 @@
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
-    if([tableView tag] == 0)
-    {
-//        NSLog(@"ID count = %d", [ID count]);
-        return [ID count];    
-    }
-    else
-    {
-        if([self.idList selectedRow] == -1)
-            return 0;
-        else
-            return [controlTable count];
-    }
+    return self.dynamixel.allDynamixelServos.count;
 }
 
 
@@ -214,7 +196,7 @@
         case 12: // Voltages
         case 13:
         case 42:
-            return [[NSString alloc] initWithFormat:@"%.1f V", float(value)/10];
+            return [[NSString alloc] initWithFormat:@"%.1f V", (int)value/10.0f];
         
         case 38: // Speed/Load
         case 40:
@@ -233,16 +215,16 @@
         case 27:
         case 28:
         case 29:
-            return [[NSString alloc] initWithFormat:@"%.1f°", 300.0f*float(value)/float(0x3ff)];
+            return [[NSString alloc] initWithFormat:@"%.1f°", 300.0f*((int)value)/0x3ff];
 
         case 32: //Speed
             if(value > 0)
-                return [[NSString alloc] initWithFormat:@"%.1f RPM", 114.0f*float(value)/float(0x3ff)];
+                return [[NSString alloc] initWithFormat:@"%.1f RPM", 114.0f*((int)value)/0x3ff];
             else
                 return @"Max RPM";
 
         case 48: // Punch
-            return [[NSString alloc] initWithFormat:@"%.1f%%", 100.0f*float(value)/float(0x3ff)];
+            return [[NSString alloc] initWithFormat:@"%.1f%%", 100.0f*((int)value)/0x3ff];
 
         default:
             return [[NSString alloc] initWithFormat:@"%d", value];
@@ -256,93 +238,67 @@
       objectValueForTableColumn:(NSTableColumn *)tableColumn
       row:(int)row
 {
-    if([tableView tag] == 0)
-    {
-        return [ID objectAtIndex: row];
-    }
+    ServoInfo* servo = self.dynamixel.allDynamixelServos[row];
+ 
+    unsigned char* servoData = servo.servoData;
+    NSString* identifier = [tableColumn identifier];
     
-    else
-    {
-        if([[tableColumn identifier] isEqualToString: @"Item"])
-        {
-            return [[controlTable objectAtIndex: row] objectForKey: [tableColumn identifier]];
-        
-        }
-        else if([[tableColumn identifier] isEqualToString: @"Value"])
-        {
-            int address = [[[controlTable objectAtIndex: row] objectForKey: @"Address"] intValue];
-            int size = [[[controlTable objectAtIndex: row] objectForKey: @"Size"] intValue];
-
-            if(size == 1)
-                return [self translateValue: servoData[address] atAddress: address];
-            else
-                return [self translateValue: servoData[address]+256*servoData[address+1] atAddress: address];
-        }
-        else // Raw
-        {
-            int address = [[[controlTable objectAtIndex: row] objectForKey: @"Address"] intValue];
-            int size = [[[controlTable objectAtIndex: row] objectForKey: @"Size"] intValue];
-            if(size == 1)
-                return [[NSString alloc] initWithFormat:@"%d", servoData[address]];
-            else
-                return [[NSString alloc] initWithFormat:@"%d", servoData[address]+256*servoData[address+1]];
-        }
+    if( [identifier isEqualToString:@"ID"] ) {
+        NSString* name = [NSString stringWithFormat:@"ID-%ld", servo.sid];
+        return name;
     }
+    else if([identifier isEqualToString: @"Item"])
+    {
+        return [[controlTable objectAtIndex: row] objectForKey: [tableColumn identifier]];
+    
+    }
+    else if([identifier isEqualToString: @"Value"])
+    {
+        int address = [[[controlTable objectAtIndex: row] objectForKey: @"Address"] intValue];
+        int size = [[[controlTable objectAtIndex: row] objectForKey: @"Size"] intValue];
+
+        if(size == 1)
+            return [self translateValue: servoData[address] atAddress: address];
+        else
+            return [self translateValue: servoData[address]+256*servoData[address+1] atAddress: address];
+    }
+    else // Raw
+    {
+        int address = [[[controlTable objectAtIndex: row] objectForKey: @"Address"] intValue];
+        int size = [[[controlTable objectAtIndex: row] objectForKey: @"Size"] intValue];
+        if(size == 1)
+            return [[NSString alloc] initWithFormat:@"%d", servoData[address]];
+        else
+            return [[NSString alloc] initWithFormat:@"%d", servoData[address]+256*servoData[address+1]];
+    }
+
 }
 
 
 
 - (IBAction)connect:(id)sender
-{       
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *device = [defaults stringForKey:@"device"];
-    if(device == nil) device = @"/dev/cu.usbserial-A7005Lxn";
+{
+    Dynamixel* d = self.dynamixel;
+    if( nil == d ) {
+        d = [[Dynamixel alloc] init];
+        self.dynamixel = d;
+    }
     
-    if(!dc)
-    {    
-        try
-        {
-            dc = new DynamixelComm([device UTF8String], 1000000);
-        }
-        catch(...)
-        {
-            NSAlert *alert = [[NSAlert alloc] init];
-            [alert addButtonWithTitle:@"OK"];
-            [alert setMessageText:@"Could not find USB2Dynamixel"];
-            [alert setInformativeText:@"Check that the cable is connected and that the device name is set correctly in the preferences."];
-            [alert setAlertStyle:NSWarningAlertStyle];
-
-            if ([alert runModal] == NSAlertFirstButtonReturn) {
-                // OK clicked, delete the record
-            }
-            return;
-        }
+    if( ![d isConnected] ) {
         
-        // Scan for dynamixels
+        [d connect];
         
-        [ID removeAllObjects];
-        
-        for(int i=0; i<32; i++)
-        {
-            if(dc->Ping(i))
-            {
-            //  NSLog(@"ID = %d found", i);
-                [ID addObject: [[NSString alloc] initWithFormat:@"ID-%d", i]];
-                [idNumber addObject: [NSNumber numberWithInt: i]];
-            }
-        }
-        [self.idList reloadData];
+        [self.servoValues reloadData];
         [self.connectButton setTitle: @"Disconnect"];
         [self.torqueEnableButton setEnabled: YES];   // TODO: check first that we have connected
         [self.torqueDisableButton setEnabled: YES];
     }
     else
     {
-//        NSLog(@"Disconnect");
-        delete dc;
-        dc = NULL;
-        [ID removeAllObjects];
-        [self.idList reloadData];
+        
+        [d disconnect];
+        
+        [self.servoValues reloadData];
         [self.connectButton setTitle: @"Connect"];
 
         [self.torqueEnableButton setEnabled: NO];
@@ -354,38 +310,10 @@
 
 - (void)forceUpdate
 {
-    if(dc && [self.idList selectedRow] != -1)
-        dc->ReadAllData([[idNumber objectAtIndex: [self.idList selectedRow]] intValue], servoData);
-
-    [self.servoValues reloadData];
-    [self.servoValues display];      // Force redraw
-
-    // Update controls
-    
-    if([self.idList selectedRow] == -1)
-        return;
-
-    [self.positionIndicator setIntValue: servoData[P_PRESENT_POSITION_L]+256*servoData[P_PRESENT_POSITION_H]];
-    
-    unsigned int speed = servoData[P_PRESENT_SPEED_L]+256*servoData[P_PRESENT_SPEED_H];
-    if(speed < 1024)
-        [self.speedIndicator setIntValue: speed];
-    else
-        [self.speedIndicator setIntValue: speed-1024];
-        
-    int load = servoData[P_PRESENT_LOAD_L]+256*servoData[P_PRESENT_LOAD_H];
-    if(load >= 1024) load -= 1024;
-    [self.loadIndicator setIntValue: load];
-
-    [self.voltageIndicator setIntValue: servoData[P_PRESENT_VOLTAGE]];
-    [self.temperatureIndicator setIntValue: servoData[P_PRESENT_TEMPERATURE]];
-
-    // Move the goal position with the servo if torque is disabled
-
-    if(servoData[P_TORQUE_ENABLE] == 0 && dc) //  && [goalTracking  intValue] 
-        [self.goalPositionSlider setIntValue: servoData[P_PRESENT_POSITION_L]+256*servoData[P_PRESENT_POSITION_H]];
-
-    [self.torqueEnable setIntValue: servoData[P_TORQUE_ENABLE]];
+    if( [self.dynamixel isConnected] ) {
+        [self.dynamixel update];
+        [self update: self];
+    }
 
 }
 
@@ -426,37 +354,32 @@
 - (IBAction)update:(id)sender
 {
     [self.servoValues reloadData];
+    NSInteger index = [self.servoValues selectedRow];
     
-    if([self.idList selectedRow] == -1)
+    if( index == -1)
     {
         [self enableControls: NO];
         return;
     }
     
+    ServoInfo* servo = self.dynamixel.allDynamixelServos[index];
+    
     [self enableControls: YES];
 
-    [self.positionIndicator setIntValue: servoData[P_PRESENT_POSITION_L]+256*servoData[P_PRESENT_POSITION_H]];
+    [self.positionIndicator setIntegerValue: servo.position];
+    [self.speedIndicator setIntegerValue: servo.speed];
+    [self.loadIndicator setIntegerValue:servo.load];
     
-    unsigned int speed = servoData[P_PRESENT_SPEED_L]+256*servoData[P_PRESENT_SPEED_H];
-    if(speed < 1024)
-        [self.speedIndicator setIntValue: speed];
-    else
-        [self.speedIndicator setIntValue: speed-1024];
-        
-    int load = servoData[P_PRESENT_LOAD_L]+256*servoData[P_PRESENT_LOAD_H];
-    if(load >= 1024) load -= 1024;
-    [self.loadIndicator setIntValue: load];
-    
-    [self.voltageIndicator setIntValue: servoData[P_PRESENT_VOLTAGE]];
-    [self.temperatureIndicator setIntValue: servoData[P_PRESENT_TEMPERATURE]];
+    [self.voltageIndicator setIntegerValue:servo.voltage];
+    [self.temperatureIndicator setIntegerValue:servo.temperature];
 
     // Move the goal position with the servo if torque is disabled
     // or new ID is selected
 
-    if((servoData[P_TORQUE_ENABLE] == 0 || newID) && dc)
-        [self.goalPositionSlider setIntValue: servoData[P_PRESENT_POSITION_L]+256*servoData[P_PRESENT_POSITION_H]];
+    if( (0 == servo.torque || newID ) && self.dynamixel )
+        [self.goalPositionSlider setIntegerValue:servo.position];
 
-    [self.torqueEnable setIntValue: servoData[P_TORQUE_ENABLE]];
+    [self.torqueEnable setIntegerValue:servo.torque];
     
     newID = NO;
 }
@@ -466,18 +389,28 @@
 - (IBAction)setGoalPosition:(id)sender
 {
     int p = [self.goalPositionSlider intValue];
-    int s = [self.movingSpeedSlider intValue];
-    if(s == 1024) s = 0; // set maximum speed (no speed control) for maximal value
-    dc->Move([[idNumber objectAtIndex: [self.idList selectedRow]] intValue], p, s);
+//    int s = [self.movingSpeedSlider intValue];
+//    if(s == 1024) s = 0; // set maximum speed (no speed control) for maximal value
+    
+    NSInteger index = [self.servoValues selectedRow];
+    ServoInfo* servo = self.dynamixel.allDynamixelServos[index];
+    [self.dynamixel setPosition:p ofServo:servo.sid];
+    
+//    dc->Move([[idNumber objectAtIndex: [self.idList selectedRow]] intValue], p, s);
 }
 
 
 
 - (IBAction)setSpeed:(id)sender
 {
+    
+    NSInteger index = [self.servoValues selectedRow];
+    ServoInfo* servo = self.dynamixel.allDynamixelServos[index];
+
     int s = [self.movingSpeedSlider intValue];
     if(s == 1024) s = 0; // set maximum speed (no speed control) for maximum value
-    dc->SetSpeed([[idNumber objectAtIndex: [self.idList selectedRow]] intValue], s);
+
+    [self.dynamixel setSpeed:s ofServo:servo.sid];
     
     [self forceUpdate];
 }
@@ -486,49 +419,55 @@
 
 - (IBAction)toggleTorque:(id)sender
 {
-    dc->SetTorque([[idNumber objectAtIndex: [self.idList selectedRow]] intValue], [sender intValue]);
+//    dc->SetTorque([[idNumber objectAtIndex: [self.idList selectedRow]] intValue], [sender intValue]);
 }
-
 
 
 - (IBAction)torqueAllEnable:(id)sender
 {
-    dc->SetTorque(254, 1);
+    [self.dynamixel torqueAllEnable];
 }
 
 
 
 - (IBAction)torqueAllDisable:(id)sender
 {
-    dc->SetTorque(254, 0);
+    [self.dynamixel torqueAllDisable];
 }
 
 
 
 - (void) tableViewSelectionDidChange: (NSNotification *) notification
 {
-    NSInteger row;
-
-    if([notification object] == self.idList)
+    NSInteger row = [self.servoValues selectedRow];
+    if (row == -1) {
+        //
+    }
+    else
     {
-        row = [self.idList selectedRow];
-
-        if (row == -1) {
-            //
-        }
-        else
-        {
-            newID = YES;
-        }
+        newID = YES;
     }
 }
 
 - (IBAction)runScript:(id)sender {
     
     NSString* js = [NSString stringWithString:[[self.scriptEditor textStorage] string]];
-//    NSString* js = [[self.scriptEditor textStorage] string];
-    [self evalScript:js];
+    [self.jsWrapper evalScript:js];
     
+}
+
+- (void)loadJSContext {
+    
+    JSWrapper* wrapper = [[JSWrapper alloc] init];
+    wrapper.logView = (LogTextView*)(self.logView);
+    wrapper.dynamixel = self.dynamixel;
+    self.jsWrapper = wrapper;
+    
+    
+}
+
+- (void)releaseJSContext {
+    self.jsWrapper = nil;
 }
 
 @end

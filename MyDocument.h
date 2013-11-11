@@ -27,7 +27,6 @@
 
 @interface MyDocument : NSDocument
 
-@property(nonatomic,strong) IBOutlet NSTableView * idList;
 @property(nonatomic,strong) IBOutlet NSTableView * servoValues;
 @property(nonatomic,strong) IBOutlet NSButton * connectButton;
 

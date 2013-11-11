@@ -9,14 +9,17 @@
 #import <Foundation/Foundation.h>
 
 @class LogTextView;
+@class Dynamixel;
 
 @interface JSWrapper : NSObject
 
 @property(nonatomic,strong) LogTextView* logView;
 @property(nonatomic,strong) JSContext* jsContext;
+@property(nonatomic,strong) Dynamixel* dynamixel;
 
 - (void)evalScript:(NSString*)log;
 
 + (JSWrapper*)sharedInstance;
+
 
 @end

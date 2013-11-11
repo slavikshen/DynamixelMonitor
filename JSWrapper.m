@@ -47,6 +47,12 @@
     
 }
 
+- (void)setDynamixel:(Dynamixel *)dynamixel {
+    _dynamixel = dynamixel;
+    self.jsContext[@"D"] = dynamixel;
+    self.jsContext[@"Dynamxil"] = dynamixel;
+}
+
 
 - (void)evalScript:(NSString*)script {
     
