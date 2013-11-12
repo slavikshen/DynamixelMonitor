@@ -61,4 +61,8 @@
 @property(nonatomic,readonly,strong) NSArray* allDynamixelServos;
 @property(nonatomic,readonly,assign) NSInteger numberOfServos;
 
+
++(Dynamixel*)sharedInstance;
+
+
 @end

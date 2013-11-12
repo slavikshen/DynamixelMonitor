@@ -71,6 +71,17 @@
 
 @dynamic numberOfServos;
 
++(Dynamixel*)sharedInstance {
+ 
+    static Dynamixel* inst = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        if( nil == inst ) {
+            inst = [[Dynamixel alloc] init];
+        }
+    });
+    return inst;
+}
 
 - (id)init {
  

@@ -23,13 +23,20 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class ControlPanelController;
+
 @interface Controller : NSObject<NSApplicationDelegate> {
 }
 
 @property (assign) IBOutlet NSTextField *myTextField;
 @property (assign) IBOutlet NSWindow *myWindow;
 
+@property (nonatomic,strong) ControlPanelController* controlPanelController;
+
 - (IBAction)textFieldAction:(id)sender;
 - (void)applicationDidFinishLaunching:(NSNotification *)notification;
+
+//- (IBAction)openDocument:(id)sender;
+//- (IBAction)newDocument:(id)sender;
 
 @end

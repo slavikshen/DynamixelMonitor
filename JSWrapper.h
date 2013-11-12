@@ -13,7 +13,7 @@
 
 @interface JSWrapper : NSObject
 
-@property(nonatomic,strong) LogTextView* logView;
+@property(nonatomic,strong) IBOutlet LogTextView* logView;
 @property(nonatomic,strong) JSContext* jsContext;
 @property(nonatomic,strong) Dynamixel* dynamixel;
 

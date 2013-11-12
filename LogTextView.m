@@ -11,22 +11,21 @@
 @implementation LogTextView
 
 
-//- (id)initWithCoder:(NSCoder *)aDecoder {
-//    
-//    self = [super initWithCoder:aDecoder];
-//    [self _setup];
-//    
-//    return self;
-//    
-//}
-//
-//- (void)_setup {
-// 
-//    self.backgroundColor = [NSColor blackColor];
-//    self.textColor = [NSColor lightGrayColor];
-//    self.font = [NSFont systemFontOfSize:14];
-//    
-//}
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    
+    self = [super initWithCoder:aDecoder];
+    [self _setup];
+    
+    return self;
+    
+}
+
+- (void)_setup {
+ 
+    self.backgroundColor = [NSColor colorWithWhite:0.1 alpha:1];
+    self.textColor = [NSColor lightGrayColor];
+    
+}
 
 
 -(void)log:(NSString*)string {

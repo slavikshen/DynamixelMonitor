@@ -22,18 +22,32 @@
 
 #import "Controller.h"
 #import "JSWrapper.h"
+#import "ControlPanelController.h"
 
 @implementation Controller
 
-#define defaultValue @"/dev/cu.usbserial-A7005Lxn"
+#define defaultValue @"/dev/tty.usbserial-AD01UY2K"
 #define myKey @"device"
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    [defaults setObject:[NSNumber numberWithBool:NO] forKey:@"NSNavLastUserSetHideExtensionButtonState"];
+    
     NSString *string = [defaults stringForKey:myKey];
     if (string == nil) string = defaultValue;
     [self.myTextField setStringValue:string];
+    
+    ControlPanelController* controlPanelController = [[ControlPanelController alloc] initWithWindowNibName:@"ControlPanelController"];
+    self.controlPanelController = controlPanelController;
+    
+    double delayInSeconds = 1.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [controlPanelController.window makeKeyAndOrderFront:nil];
+    });
+    
     
 }
 
@@ -54,5 +68,15 @@
     
     [self.myWindow orderOut: self];
 }
+
+//- (IBAction)openDocument:(id)sender {
+//    NSLog(@"open document");
+//}
+//
+//- (IBAction)newDocument:(id)sender {
+// 
+//    NSLog(@"new document");
+//    
+//}
 
 @end

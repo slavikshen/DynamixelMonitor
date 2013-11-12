@@ -67,6 +67,9 @@
 
 - (void)evalScript:(NSString*)script {
     
+    if( ![self.dynamixel isConnected] ) {
+        [self.dynamixel connect];
+    }
     [self.dynamixel clearAllTimer];
     NSLog(@"eval script\n%@",script);
     id ret = [self.jsContext evaluateScript:script];

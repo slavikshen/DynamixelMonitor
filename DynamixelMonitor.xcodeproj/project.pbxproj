@@ -11,23 +11,80 @@
 		1DDD582D0DA1D0D100B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD582A0DA1D0D100B32029 /* MainMenu.xib */; };
 		22293AB8116E973300183C8B /* Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 22293AB7116E973300183C8B /* Controller.m */; };
 		2245DFF711669A140096558D /* AX12.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2245DFF511669A140096558D /* AX12.plist */; };
-		2250F13E117E2E0900B6E6D3 /* IKAROS_Serial_BSD.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2250F13A117E2E0900B6E6D3 /* IKAROS_Serial_BSD.cc */; };
-		2250F1C7117FC6EE00B6E6D3 /* DynamixelComm.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2250F1C6117FC6EE00B6E6D3 /* DynamixelComm.cc */; };
 		22778C97116AA89E001C0ECD /* Help in Resources */ = {isa = PBXBuildFile; fileRef = 22778C91116AA89E001C0ECD /* Help */; };
 		6D36490C18273DBD009365FF /* LogTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D36490B18273DBD009365FF /* LogTextView.m */; };
 		6D36490F18273DED009365FF /* ScriptTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D36490E18273DED009365FF /* ScriptTextView.m */; };
 		6D7637761828365400191B53 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D7637751828365400191B53 /* JavaScriptCore.framework */; };
 		6D7637791828367400191B53 /* JSWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7637781828367400191B53 /* JSWrapper.m */; };
 		6D7637821828BE1C00191B53 /* console.html in Resources */ = {isa = PBXBuildFile; fileRef = 6D7637811828BE1C00191B53 /* console.html */; };
-		6D940639182E0A2300A01ADB /* MyDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D940636182E0A2300A01ADB /* MyDocument.m */; };
 		6D94063D182E0AE200A01ADB /* Console.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D94063C182E0AE200A01ADB /* Console.m */; };
 		6DCCFED5182E2B9800D4E0C3 /* Dynamixel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DCCFED4182E2B9800D4E0C3 /* Dynamixel.mm */; };
 		6DCCFED81830B8FA00D4E0C3 /* JSTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DCCFED71830B8FA00D4E0C3 /* JSTimer.m */; };
+		6DCCFEE11831946200D4E0C3 /* ControlPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DCCFEDF1831946200D4E0C3 /* ControlPanelController.m */; };
+		6DCCFEE21831946200D4E0C3 /* ControlPanelController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DCCFEE01831946200D4E0C3 /* ControlPanelController.xib */; };
+		6DCCFEEA1831969F00D4E0C3 /* USB_Template.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DCCFEE81831969F00D4E0C3 /* USB_Template.png */; };
+		6DCCFEEB1831969F00D4E0C3 /* USB_Template@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DCCFEE91831969F00D4E0C3 /* USB_Template@2x.png */; };
+		6DCCFEEE183197CA00D4E0C3 /* New_Template.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DCCFEEC183197CA00D4E0C3 /* New_Template.png */; };
+		6DCCFEEF183197CA00D4E0C3 /* New_Template@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DCCFEED183197CA00D4E0C3 /* New_Template@2x.png */; };
+		6DCCFEF218319B0100D4E0C3 /* Torque_Template.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DCCFEF018319B0100D4E0C3 /* Torque_Template.png */; };
+		6DCCFEF318319B0100D4E0C3 /* Torque_Template@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DCCFEF118319B0100D4E0C3 /* Torque_Template@2x.png */; };
+		6DCCFEF618319D3300D4E0C3 /* Open_Template.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DCCFEF418319D3300D4E0C3 /* Open_Template.png */; };
+		6DCCFEF718319D3300D4E0C3 /* Open_Template@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DCCFEF518319D3300D4E0C3 /* Open_Template@2x.png */; };
+		6DE7BA5D1831AE2400369988 /* JSD.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 6DE7BA5C1831AE2400369988 /* JSD.iconset */; };
+		6DE7BA611831AE9500369988 /* ScriptDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DE7BA5F1831AE9500369988 /* ScriptDocument.m */; };
+		6DE7BA621831AE9500369988 /* ScriptDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DE7BA601831AE9500369988 /* ScriptDocument.xib */; };
+		6DE7BA671831AFAB00369988 /* Play_Template.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DE7BA631831AFAB00369988 /* Play_Template.png */; };
+		6DE7BA681831AFAB00369988 /* Play_Template@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DE7BA641831AFAB00369988 /* Play_Template@2x.png */; };
+		6DE7BA691831AFAB00369988 /* Stop_Template.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DE7BA651831AFAB00369988 /* Stop_Template.png */; };
+		6DE7BA6A1831AFAB00369988 /* Stop_Template@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DE7BA661831AFAB00369988 /* Stop_Template@2x.png */; };
+		6DE7BA6C1831B04C00369988 /* robot_Template.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DE7BA6B1831B04C00369988 /* robot_Template.png */; };
+		6DE7BBEA1831B57D00369988 /* MGSFragaria.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DE7BBE91831B57000369988 /* MGSFragaria.framework */; };
+		6DE7BBED1831DD1B00369988 /* DynamixelComm.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2250F1C6117FC6EE00B6E6D3 /* DynamixelComm.cc */; };
+		6DE7BBEE1831DD1B00369988 /* IKAROS_Serial_BSD.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2250F13A117E2E0900B6E6D3 /* IKAROS_Serial_BSD.cc */; };
+		6DE7BBF01831E9FF00369988 /* Empty.djs in Resources */ = {isa = PBXBuildFile; fileRef = 6DE7BBEF1831E9FF00369988 /* Empty.djs */; };
 		8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */; };
 		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
 		8D15AC320486D014006FF6A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4B0FDCFA73011CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6DE7BBE21831B57000369988 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6DE7BBDB1831B56F00369988 /* Fragaria.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AB648E2A11FB385700AEF7BD;
+			remoteInfo = "Fragaria Doc";
+		};
+		6DE7BBE41831B57000369988 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6DE7BBDB1831B56F00369988 /* Fragaria.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8D1107320486CEB800E47090;
+			remoteInfo = "Fragaria GC";
+		};
+		6DE7BBE61831B57000369988 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6DE7BBDB1831B56F00369988 /* Fragaria.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = ABCA4DAF16137FC000E4849B;
+			remoteInfo = Fragaria;
+		};
+		6DE7BBE81831B57000369988 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6DE7BBDB1831B56F00369988 /* Fragaria.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AB69B62B118B745700903D1D;
+			remoteInfo = MGSFragaria;
+		};
+		6DE7BBEB1831B58200369988 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6DE7BBDB1831B56F00369988 /* Fragaria.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = AB69B62A118B745700903D1D;
+			remoteInfo = MGSFragaria;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		089C1660FE840EACC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -60,14 +117,34 @@
 		6D7637771828367400191B53 /* JSWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSWrapper.h; sourceTree = "<group>"; };
 		6D7637781828367400191B53 /* JSWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSWrapper.m; sourceTree = "<group>"; };
 		6D7637811828BE1C00191B53 /* console.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = console.html; sourceTree = "<group>"; };
-		6D940635182E0A2300A01ADB /* MyDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyDocument.h; sourceTree = "<group>"; };
-		6D940636182E0A2300A01ADB /* MyDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyDocument.m; sourceTree = "<group>"; };
 		6D94063B182E0AE200A01ADB /* Console.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Console.h; sourceTree = "<group>"; };
 		6D94063C182E0AE200A01ADB /* Console.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Console.m; sourceTree = "<group>"; };
 		6DCCFED3182E2B9800D4E0C3 /* Dynamixel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dynamixel.h; sourceTree = "<group>"; };
 		6DCCFED4182E2B9800D4E0C3 /* Dynamixel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Dynamixel.mm; sourceTree = "<group>"; };
 		6DCCFED61830B8FA00D4E0C3 /* JSTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSTimer.h; sourceTree = "<group>"; };
 		6DCCFED71830B8FA00D4E0C3 /* JSTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSTimer.m; sourceTree = "<group>"; };
+		6DCCFEDE1831946200D4E0C3 /* ControlPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlPanelController.h; sourceTree = "<group>"; };
+		6DCCFEDF1831946200D4E0C3 /* ControlPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlPanelController.m; sourceTree = "<group>"; };
+		6DCCFEE01831946200D4E0C3 /* ControlPanelController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ControlPanelController.xib; sourceTree = "<group>"; };
+		6DCCFEE81831969F00D4E0C3 /* USB_Template.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = USB_Template.png; sourceTree = "<group>"; };
+		6DCCFEE91831969F00D4E0C3 /* USB_Template@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "USB_Template@2x.png"; sourceTree = "<group>"; };
+		6DCCFEEC183197CA00D4E0C3 /* New_Template.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = New_Template.png; sourceTree = "<group>"; };
+		6DCCFEED183197CA00D4E0C3 /* New_Template@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "New_Template@2x.png"; sourceTree = "<group>"; };
+		6DCCFEF018319B0100D4E0C3 /* Torque_Template.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Torque_Template.png; sourceTree = "<group>"; };
+		6DCCFEF118319B0100D4E0C3 /* Torque_Template@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Torque_Template@2x.png"; sourceTree = "<group>"; };
+		6DCCFEF418319D3300D4E0C3 /* Open_Template.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Open_Template.png; sourceTree = "<group>"; };
+		6DCCFEF518319D3300D4E0C3 /* Open_Template@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Open_Template@2x.png"; sourceTree = "<group>"; };
+		6DE7BA5C1831AE2400369988 /* JSD.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = JSD.iconset; sourceTree = "<group>"; };
+		6DE7BA5E1831AE9500369988 /* ScriptDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScriptDocument.h; sourceTree = "<group>"; };
+		6DE7BA5F1831AE9500369988 /* ScriptDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScriptDocument.m; sourceTree = "<group>"; };
+		6DE7BA601831AE9500369988 /* ScriptDocument.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScriptDocument.xib; sourceTree = "<group>"; };
+		6DE7BA631831AFAB00369988 /* Play_Template.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Play_Template.png; sourceTree = "<group>"; };
+		6DE7BA641831AFAB00369988 /* Play_Template@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Play_Template@2x.png"; sourceTree = "<group>"; };
+		6DE7BA651831AFAB00369988 /* Stop_Template.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Stop_Template.png; sourceTree = "<group>"; };
+		6DE7BA661831AFAB00369988 /* Stop_Template@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Stop_Template@2x.png"; sourceTree = "<group>"; };
+		6DE7BA6B1831B04C00369988 /* robot_Template.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = robot_Template.png; sourceTree = "<group>"; };
+		6DE7BBDB1831B56F00369988 /* Fragaria.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Fragaria.xcodeproj; path = Fragaria/Fragaria.xcodeproj; sourceTree = "<group>"; };
+		6DE7BBEF1831E9FF00369988 /* Empty.djs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Empty.djs; sourceTree = "<group>"; };
 		8D15AC360486D014006FF6A4 /* DynamixelMonitor-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DynamixelMonitor-Info.plist"; sourceTree = "<group>"; };
 		8D15AC370486D014006FF6A4 /* DynamixelMonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DynamixelMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -77,6 +154,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DE7BBEA1831B57D00369988 /* MGSFragaria.framework in Frameworks */,
 				6D7637761828365400191B53 /* JavaScriptCore.framework in Frameworks */,
 				8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */,
 			);
@@ -109,6 +187,8 @@
 		2A37F4AAFDCFA73011CA2CEA /* DynamixelMonitor */ = {
 			isa = PBXGroup;
 			children = (
+				6DE7BBDB1831B56F00369988 /* Fragaria.xcodeproj */,
+				6DE7BA5C1831AE2400369988 /* JSD.iconset */,
 				2250F2F11180911800B6E6D3 /* ReadMe.txt */,
 				2250F2F31180911F00B6E6D3 /* Licence.txt */,
 				2A37F4ABFDCFA73011CA2CEA /* Classes */,
@@ -124,8 +204,6 @@
 		2A37F4ABFDCFA73011CA2CEA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				6D940635182E0A2300A01ADB /* MyDocument.h */,
-				6D940636182E0A2300A01ADB /* MyDocument.m */,
 				22293AB6116E973300183C8B /* Controller.h */,
 				22293AB7116E973300183C8B /* Controller.m */,
 				6D36490A18273DBD009365FF /* LogTextView.h */,
@@ -140,6 +218,12 @@
 				6DCCFED4182E2B9800D4E0C3 /* Dynamixel.mm */,
 				6DCCFED61830B8FA00D4E0C3 /* JSTimer.h */,
 				6DCCFED71830B8FA00D4E0C3 /* JSTimer.m */,
+				6DCCFEDE1831946200D4E0C3 /* ControlPanelController.h */,
+				6DCCFEDF1831946200D4E0C3 /* ControlPanelController.m */,
+				6DCCFEE01831946200D4E0C3 /* ControlPanelController.xib */,
+				6DE7BA5E1831AE9500369988 /* ScriptDocument.h */,
+				6DE7BA5F1831AE9500369988 /* ScriptDocument.m */,
+				6DE7BA601831AE9500369988 /* ScriptDocument.xib */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -156,6 +240,7 @@
 		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6DCCFEE71831969F00D4E0C3 /* Images */,
 				22778C91116AA89E001C0ECD /* Help */,
 				2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */,
 				2245DFF511669A140096558D /* AX12.plist */,
@@ -164,6 +249,7 @@
 				1DDD58280DA1D0D100B32029 /* MyDocument.xib */,
 				1DDD582A0DA1D0D100B32029 /* MainMenu.xib */,
 				6D7637811828BE1C00191B53 /* console.html */,
+				6DE7BBEF1831E9FF00369988 /* Empty.djs */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -180,6 +266,37 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6DCCFEE71831969F00D4E0C3 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				6DE7BA6B1831B04C00369988 /* robot_Template.png */,
+				6DE7BA631831AFAB00369988 /* Play_Template.png */,
+				6DE7BA641831AFAB00369988 /* Play_Template@2x.png */,
+				6DE7BA651831AFAB00369988 /* Stop_Template.png */,
+				6DE7BA661831AFAB00369988 /* Stop_Template@2x.png */,
+				6DCCFEF418319D3300D4E0C3 /* Open_Template.png */,
+				6DCCFEF518319D3300D4E0C3 /* Open_Template@2x.png */,
+				6DCCFEF018319B0100D4E0C3 /* Torque_Template.png */,
+				6DCCFEF118319B0100D4E0C3 /* Torque_Template@2x.png */,
+				6DCCFEEC183197CA00D4E0C3 /* New_Template.png */,
+				6DCCFEED183197CA00D4E0C3 /* New_Template@2x.png */,
+				6DCCFEE81831969F00D4E0C3 /* USB_Template.png */,
+				6DCCFEE91831969F00D4E0C3 /* USB_Template@2x.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		6DE7BBDC1831B56F00369988 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6DE7BBE31831B57000369988 /* Fragaria Doc.app */,
+				6DE7BBE51831B57000369988 /* Fragaria GC.app */,
+				6DE7BBE71831B57000369988 /* Fragaria.app */,
+				6DE7BBE91831B57000369988 /* MGSFragaria.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -194,6 +311,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				6DE7BBEC1831B58200369988 /* PBXTargetDependency */,
 			);
 			name = DynamixelMonitor;
 			productInstallPath = "$(HOME)/Applications";
@@ -216,9 +334,16 @@
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				en,
+				English,
 			);
 			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* DynamixelMonitor */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 6DE7BBDC1831B56F00369988 /* Products */;
+					ProjectRef = 6DE7BBDB1831B56F00369988 /* Fragaria.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				8D15AC270486D014006FF6A4 /* DynamixelMonitor */,
@@ -226,18 +351,66 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		6DE7BBE31831B57000369988 /* Fragaria Doc.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "Fragaria Doc.app";
+			remoteRef = 6DE7BBE21831B57000369988 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6DE7BBE51831B57000369988 /* Fragaria GC.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "Fragaria GC.app";
+			remoteRef = 6DE7BBE41831B57000369988 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6DE7BBE71831B57000369988 /* Fragaria.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = Fragaria.app;
+			remoteRef = 6DE7BBE61831B57000369988 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6DE7BBE91831B57000369988 /* MGSFragaria.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = MGSFragaria.framework;
+			remoteRef = 6DE7BBE81831B57000369988 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		8D15AC2B0486D014006FF6A4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				6D7637821828BE1C00191B53 /* console.html in Resources */,
+				6DE7BA6A1831AFAB00369988 /* Stop_Template@2x.png in Resources */,
+				6DCCFEF618319D3300D4E0C3 /* Open_Template.png in Resources */,
+				6DCCFEF218319B0100D4E0C3 /* Torque_Template.png in Resources */,
 				8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */,
+				6DCCFEE21831946200D4E0C3 /* ControlPanelController.xib in Resources */,
+				6DE7BA6C1831B04C00369988 /* robot_Template.png in Resources */,
+				6DE7BA621831AE9500369988 /* ScriptDocument.xib in Resources */,
 				8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */,
+				6DCCFEEE183197CA00D4E0C3 /* New_Template.png in Resources */,
+				6DCCFEEA1831969F00D4E0C3 /* USB_Template.png in Resources */,
+				6DE7BA681831AFAB00369988 /* Play_Template@2x.png in Resources */,
 				1DDD582C0DA1D0D100B32029 /* MyDocument.xib in Resources */,
+				6DE7BA691831AFAB00369988 /* Stop_Template.png in Resources */,
+				6DCCFEEF183197CA00D4E0C3 /* New_Template@2x.png in Resources */,
+				6DE7BBF01831E9FF00369988 /* Empty.djs in Resources */,
+				6DCCFEEB1831969F00D4E0C3 /* USB_Template@2x.png in Resources */,
+				6DCCFEF718319D3300D4E0C3 /* Open_Template@2x.png in Resources */,
 				1DDD582D0DA1D0D100B32029 /* MainMenu.xib in Resources */,
 				2245DFF711669A140096558D /* AX12.plist in Resources */,
+				6DE7BA5D1831AE2400369988 /* JSD.iconset in Resources */,
+				6DE7BA671831AFAB00369988 /* Play_Template.png in Resources */,
 				22778C97116AA89E001C0ECD /* Help in Resources */,
+				6DCCFEF318319B0100D4E0C3 /* Torque_Template@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,21 +421,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DE7BBED1831DD1B00369988 /* DynamixelComm.cc in Sources */,
+				6DE7BBEE1831DD1B00369988 /* IKAROS_Serial_BSD.cc in Sources */,
 				6D36490F18273DED009365FF /* ScriptTextView.m in Sources */,
 				6DCCFED5182E2B9800D4E0C3 /* Dynamixel.mm in Sources */,
 				8D15AC320486D014006FF6A4 /* main.m in Sources */,
-				6D940639182E0A2300A01ADB /* MyDocument.m in Sources */,
+				6DCCFEE11831946200D4E0C3 /* ControlPanelController.m in Sources */,
+				6DE7BA611831AE9500369988 /* ScriptDocument.m in Sources */,
 				22293AB8116E973300183C8B /* Controller.m in Sources */,
-				2250F13E117E2E0900B6E6D3 /* IKAROS_Serial_BSD.cc in Sources */,
 				6D94063D182E0AE200A01ADB /* Console.m in Sources */,
 				6D7637791828367400191B53 /* JSWrapper.m in Sources */,
-				2250F1C7117FC6EE00B6E6D3 /* DynamixelComm.cc in Sources */,
 				6D36490C18273DBD009365FF /* LogTextView.m in Sources */,
 				6DCCFED81830B8FA00D4E0C3 /* JSTimer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6DE7BBEC1831B58200369988 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MGSFragaria;
+			targetProxy = 6DE7BBEB1831B58200369988 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		089C165FFE840EACC02AAC07 /* InfoPlist.strings */ = {
