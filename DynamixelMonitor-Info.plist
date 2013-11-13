@@ -3,28 +3,24 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>English</string>
+	<string>en</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
-				<string>js</string>
+				<string>djs</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string>robot_Template</string>
-			<key>CFBundleTypeMIMETypes</key>
-			<array/>
 			<key>CFBundleTypeName</key>
 			<string>DynamixelJS</string>
+			<key>CFBundleTypeOSTypes</key>
+			<array>
+				<string>????</string>
+			</array>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
-			<key>LSItemContentTypes</key>
-			<array>
-				<string>com.netscape.javascript-​source</string>
-			</array>
-			<key>LSTypeIsPackage</key>
-			<integer>0</integer>
 			<key>NSDocumentClass</key>
 			<string>ScriptDocument</string>
 		</dict>
@@ -48,7 +44,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleSignature</key>
-	<string>DYMO</string>
+	<string>APPL</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSMinimumSystemVersion</key>
