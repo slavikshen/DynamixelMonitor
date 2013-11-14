@@ -78,7 +78,7 @@
 
 - (void)stopScript {
 
-    [self.dynamixel clearAllTimer];
+    [self.dynamixel stop];
     
 }
 

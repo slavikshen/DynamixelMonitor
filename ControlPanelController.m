@@ -30,6 +30,8 @@
 {
     [super windowDidLoad];
     
+    [self.torqueToolbarItem setEnabled:NO];
+    
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
     
     NSBundle *bundle = [NSBundle mainBundle];
@@ -212,38 +214,48 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
 {
     ServoInfo* servo = self.dynamixel.allDynamixelServos[row];
     
-    unsigned char* servoData = servo.servoData;
+//    unsigned char* servoData = servo.servoData;
     NSString* identifier = [tableColumn identifier];
     
-    if( [identifier isEqualToString:@"ID"] ) {
-        NSString* name = [NSString stringWithFormat:@"ID-%ld", servo.sid];
-        return name;
-    }
-    else if([identifier isEqualToString: @"Item"])
-    {
-        return [[controlTable objectAtIndex: row] objectForKey: [tableColumn identifier]];
-        
-    }
-    else if([identifier isEqualToString: @"Value"])
-    {
-        int address = [[[controlTable objectAtIndex: row] objectForKey: @"Address"] intValue];
-        int size = [[[controlTable objectAtIndex: row] objectForKey: @"Size"] intValue];
-        
-        if(size == 1)
-            return [self translateValue: servoData[address] atAddress: address];
-        else
-            return [self translateValue: servoData[address]+256*servoData[address+1] atAddress: address];
-    }
-    else // Raw
-    {
-        int address = [[[controlTable objectAtIndex: row] objectForKey: @"Address"] intValue];
-        int size = [[[controlTable objectAtIndex: row] objectForKey: @"Size"] intValue];
-        if(size == 1)
-            return [[NSString alloc] initWithFormat:@"%d", servoData[address]];
-        else
-            return [[NSString alloc] initWithFormat:@"%d", servoData[address]+256*servoData[address+1]];
-    }
+    NSString* text = @"";
     
+    if( [identifier isEqualToString:@"ID"] ) {
+        text = [NSString stringWithFormat:@"%ld", servo.sid];
+    } else if([identifier isEqualToString: @"Position"]) {
+//        return [[controlTable objectAtIndex: row] objectForKey: [tableColumn identifier]];
+        text = [NSString stringWithFormat:@"%ld", servo.position];
+    } else if([identifier isEqualToString: @"Speed"] ) {
+        text = [NSString stringWithFormat:@"%ld", servo.speed];
+    } else if( [identifier isEqualToString:@"Temperature"] ) {
+        text = [NSString stringWithFormat:@"%ld", servo.temperature];
+    }
+        
+//    else if([identifier isEqualToString: @"Item"])
+//    {
+//        return [[controlTable objectAtIndex: row] objectForKey: [tableColumn identifier]];
+//        
+//    }
+//    else if([identifier isEqualToString: @"Value"])
+//    {
+//        int address = [[[controlTable objectAtIndex: row] objectForKey: @"Address"] intValue];
+//        int size = [[[controlTable objectAtIndex: row] objectForKey: @"Size"] intValue];
+//        
+//        if(size == 1)
+//            return [self translateValue: servoData[address] atAddress: address];
+//        else
+//            return [self translateValue: servoData[address]+256*servoData[address+1] atAddress: address];
+//    }
+//    else // Raw
+//    {
+//        int address = [[[controlTable objectAtIndex: row] objectForKey: @"Address"] intValue];
+//        int size = [[[controlTable objectAtIndex: row] objectForKey: @"Size"] intValue];
+//        if(size == 1)
+//            return [[NSString alloc] initWithFormat:@"%d", servoData[address]];
+//        else
+//            return [[NSString alloc] initWithFormat:@"%d", servoData[address]+256*servoData[address+1]];
+//    }
+    
+    return text;
 }
 
 

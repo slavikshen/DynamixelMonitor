@@ -13,6 +13,7 @@
 @interface ScriptDocument()
 
 @property(nonatomic,strong) MGSFragaria* fragaria;
+@property(nonatomic,copy) NSString* temp;
 
 @end
 
@@ -71,14 +72,18 @@
     }
     
     // set text
-    
-    NSURL* emptyFileURL = [[NSBundle mainBundle] URLForResource:@"Empty" withExtension:@"djs"];
-    NSError* err = nil;
-    NSString* defaultContent = [NSString stringWithContentsOfURL:emptyFileURL
-                                                        encoding:NSUTF8StringEncoding
-                                                           error:&err];
-    
-	[fragaria setString:defaultContent];
+    if( self.temp.length ) {
+        [fragaria setString:self.temp];
+        self.temp = nil;
+    } else {
+        NSURL* emptyFileURL = [[NSBundle mainBundle] URLForResource:@"Empty" withExtension:@"djs"];
+        NSError* err = nil;
+        NSString* defaultContent = [NSString stringWithContentsOfURL:emptyFileURL
+                                                            encoding:NSUTF8StringEncoding
+                                                               error:&err];
+        
+        [fragaria setString:defaultContent];
+    }
 	
     self.fragaria = fragaria;
     
@@ -92,8 +97,13 @@
 {
     // Insert code here to write your document to data of the specified type. If outError != NULL, ensure that you create and set an appropriate error when returning nil.
     // You can also choose to override -fileWrapperOfType:error:, -writeToURL:ofType:error:, or -writeToURL:ofType:forSaveOperation:originalContentsURL:error: instead.
+    NSString* script = nil;
+    if( self.fragaria ) {
+        script = [self.fragaria string];
+    } else {
+        script = self.temp;
+    }
     
-    NSString* script = [self.fragaria string];
     NSData* data = [script dataUsingEncoding:NSUTF8StringEncoding];
     
     if (outError) {
@@ -108,7 +118,11 @@
     // You can also choose to override -readFromFileWrapper:ofType:error: or -readFromURL:ofType:error: instead.
     // If you override either of these, you should also override -isEntireFileLoaded to return NO if the contents are lazily loaded.
     NSString* script = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    [self.fragaria setString:script];
+    if( self.fragaria ) {
+        [self.fragaria setString:script];
+    } else {
+        self.temp = script;
+    }
     
     if (outError) {
         *outError = [NSError errorWithDomain:NSOSStatusErrorDomain code:unimpErr userInfo:nil];

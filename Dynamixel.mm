@@ -94,6 +94,7 @@
 - (void)_setup {
     self.servos = [NSMutableDictionary dictionaryWithCapacity:128];
     self.timers = [NSMutableDictionary dictionaryWithCapacity:128];
+    self.frameInterval = 1;
 }
 
 
@@ -201,12 +202,24 @@
     return servo.speed;
 }
 
+- (void)setPosition:(NSInteger)position {
+
+    for( ServoInfo* servo in self.allDynamixelServos ) {
+        servo.position = position;
+        dc->SetPosition(servo.sid, position);
+    }
+    
+}
+
+
 - (void)setPosition:(NSInteger)pos ofServo:(NSInteger)servoID {
     
     ServoInfo* servo = self.servos[@(servoID)];
     int p = pos;
     int s = servo.speed;
-    if(s == 1024) s = 0; // set maximum speed (no speed control) for maximal value
+    if( 0 == s || s == 1024 ) {
+        s = self.speed;
+    }
     servo.position = pos;
     
     int sid = servoID;
@@ -280,6 +293,77 @@
     [timer stop];
     [self.timers removeObjectForKey:key];
     
+}
+
+- (void)setStatus:(NSDictionary*)positions {
+
+    for( NSString* key in positions ) {
+        
+        id value = positions[key];
+        NSInteger sid = [key integerValue];
+        
+        if( [value isKindOfClass:[NSNumber class]] )  {
+            NSInteger pos = [value integerValue];
+            [self setPosition:pos ofServo:sid];
+        } else {
+            NSLog(@"key: %@\nvalue: %@", key, value);
+        }
+        
+    }
+    
+}
+
+- (void)play:(NSArray*)frames {
+    
+    // create a timer for this
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(_playNextFrame) object:nil];
+    
+    self.currentFrames = frames;
+    self.currentFrameIndex = 0;
+    
+    [self performSelector:@selector(_playNextFrame) withObject:nil afterDelay:self.frameInterval];
+    
+}
+
+- (void)_playNextFrame {
+ 
+    NSInteger currIndex = self.currentFrameIndex;
+    NSInteger count = self.currentFrames.count;
+    
+    if( currIndex < count ) {
+
+        id value = self.currentFrames[currIndex];
+        
+        if( [value isKindOfClass:[NSNumber class]] ) {
+            NSInteger cmd = [value integerValue];
+            currIndex += cmd;
+            if( currIndex < 0 ) {
+                currIndex = 0;
+            } else if (currIndex>count) {
+                currIndex = count-1;
+            }
+            value = self.currentFrames[currIndex++];
+        } else {
+            currIndex++;
+        }
+
+        
+        if( [value isKindOfClass:[NSDictionary class]] ) {
+            NSDictionary* postions = value;
+            [self setStatus:postions];
+        }
+        
+        self.currentFrameIndex = currIndex;
+        if( currIndex < count ) {
+            [self performSelector:@selector(_playNextFrame) withObject:nil afterDelay:self.frameInterval];
+        }
+    }
+    
+}
+
+- (void)stop {
+    [self clearAllTimer];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(_playNextFrame) object:nil];
 }
 
 @end
