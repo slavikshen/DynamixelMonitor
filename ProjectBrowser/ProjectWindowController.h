@@ -8,6 +8,29 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface ProjectWindowController : NSWindowController
+#import "LogTextView.h"
+#import "JSWrapper.h"
+#import "DocumentViewController.h"
+
+@interface ProjectWindowController : NSWindowController<NSOutlineViewDelegate,NSSplitViewDelegate>
+
+@property(nonatomic,strong) IBOutlet NSOutlineView* outlineView;
+@property(nonatomic,strong) IBOutlet NSView* contentView;
+
+@property(nonatomic,strong) NSImage* folderIcon;
+@property(nonatomic,strong) NSImage* projectIcon;
+
+@property(nonatomic,strong) DocumentViewController* currentEditorController;
+
+@property(nonatomic,assign,getter = isRunning) BOOL running;
+@property(nonatomic,strong) IBOutlet NSToolbarItem* runToolbarItem;
+@property(nonatomic,strong) IBOutlet NSToolbarItem* stopToolbarItem;
+
+@property(nonatomic,strong) IBOutlet NSSplitView* editorSplitView;
+
+@property(nonatomic,strong) IBOutlet LogTextView* logView;
+@property(nonatomic,strong) IBOutlet JSWrapper* jsWrapper;
+
+- (IBAction)saveDocument:(id)sender;
 
 @end

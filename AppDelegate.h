@@ -25,7 +25,7 @@
 
 @class ControlPanelController;
 
-@interface Controller : NSObject<NSApplicationDelegate> {
+@interface AppDelegate : NSObject<NSApplicationDelegate> {
 }
 
 @property (assign) IBOutlet NSTextField *myTextField;

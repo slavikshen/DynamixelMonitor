@@ -7,7 +7,10 @@
 //
 
 #import "FileDocument.h"
+#import <MGSFragaria/MGSFragaria.h>
 
 @interface CodeDocument : FileDocument
+
+@property(nonatomic,strong) MGSFragaria* fragaria;
 
 @end

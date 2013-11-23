@@ -7,7 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "FileDocument.h"
 
 @interface DocumentViewController : NSViewController
+
+@property (strong) id document;
 
 @end

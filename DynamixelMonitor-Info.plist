@@ -9,12 +9,12 @@
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
-				<string>djs</string>
+				<string>dproject</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string>robot_Template</string>
 			<key>CFBundleTypeName</key>
-			<string>DynamixelJS</string>
+			<string>DynamixelProject</string>
 			<key>CFBundleTypeOSTypes</key>
 			<array>
 				<string>????</string>
@@ -22,7 +22,19 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>NSDocumentClass</key>
-			<string>ScriptDocument</string>
+			<string>ProjectDocument</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>js</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>Javascript</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>NSDocumentClass</key>
+			<string>CodeDocument</string>
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>

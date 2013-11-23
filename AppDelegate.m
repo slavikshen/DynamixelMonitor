@@ -20,17 +20,22 @@
 //    Created: April 1, 2010
 //
 
-#import "Controller.h"
+#import "AppDelegate.h"
 #import "JSWrapper.h"
 #import "ControlPanelController.h"
-
-@implementation Controller
+#import "FileDocument.h"
 
 #define defaultValue @"/dev/tty.usbserial-AD01UY2K"
 #define myKey @"device"
 
+@implementation AppDelegate {
+    BOOL _appHasLaunched;
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification *)notification
 {
+    _appHasLaunched = YES;
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     [defaults setObject:[NSNumber numberWithBool:NO] forKey:@"NSNavLastUserSetHideExtensionButtonState"];
@@ -38,15 +43,19 @@
     NSString *string = [defaults stringForKey:myKey];
     if (string == nil) string = defaultValue;
     [self.myTextField setStringValue:string];
+
+    [self _openLastDocument];
     
-    ControlPanelController* controlPanelController = [[ControlPanelController alloc] initWithWindowNibName:@"ControlPanelController"];
-    self.controlPanelController = controlPanelController;
-    
-    double delayInSeconds = 1.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [controlPanelController.window makeKeyAndOrderFront:nil];
-    });
+//    ControlPanelController* controlPanelController = [[ControlPanelController alloc] initWithWindowNibName:@"ControlPanelController"];
+//    self.controlPanelController = controlPanelController;
+//    
+//    [controlPanelController.window makeKeyAndOrderFront:nil];
+   
+//    double delayInSeconds = 1.0;
+//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//        [controlPanelController.window makeKeyAndOrderFront:nil];
+//    });
     
     
 }
@@ -78,5 +87,42 @@
 //    NSLog(@"new document");
 //    
 //}
+
+-(void)applicationWillFinishLaunching:(NSNotification *)notification
+{
+
+    
+}
+
+
+//- (BOOL)applicationShouldOpenUntitledFile:(NSApplication *)sender
+//{
+//    // On startup, when asked to open an untitled file, open the last opened
+//    // file instead
+//    if (!_appHasLaunched) {
+//        if( [self _openLastDocument] ) {
+//            return NO;
+//        }
+//    }
+//    return YES;
+//}
+
+- (void)_openLastDocument {
+    // Get the recent documents
+    NSDocumentController *controller =
+    [NSDocumentController sharedDocumentController];
+    NSArray *documents = [controller recentDocumentURLs];
+    
+    // If there is a recent document, try to open it.
+    if ([documents count] > 0) {
+        NSURL* url = [documents objectAtIndex:0];
+        [controller openDocumentWithContentsOfURL:url display:YES completionHandler:^(NSDocument *document, BOOL documentWasAlreadyOpen, NSError *error) {
+            if( nil == document ) {
+                [[NSDocumentController sharedDocumentController] newDocument:nil];
+            }
+        }];
+    }
+}
+
 
 @end

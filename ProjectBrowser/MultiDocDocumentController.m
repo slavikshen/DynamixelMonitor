@@ -60,4 +60,16 @@ const char* const MultiWindowDocumentControllerCloseAllContext = "com.samuelcart
     objc_msgSend(delegate,didCloseAllSelector,self,_didCloseAll,contextInfo);
 }
 
+- (void)noteNewRecentDocumentURL:(NSURL *)url {
+
+    NSString* path = url.path;
+    if( [path hasSuffix:@".dproject"] ) {
+        [super noteNewRecentDocumentURL:url];
+    }
+    
+    return;
+}
+
+
+
 @end

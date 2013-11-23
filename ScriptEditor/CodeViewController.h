@@ -8,6 +8,8 @@
 
 #import "DocumentViewController.h"
 
-@interface CodeViewController : DocumentViewController
+@interface CodeViewController : DocumentViewController<NSSplitViewDelegate>
+
+@property(nonatomic,strong) IBOutlet NSView* editorContainer;
 
 @end

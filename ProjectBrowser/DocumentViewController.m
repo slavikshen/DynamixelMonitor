@@ -14,13 +14,12 @@
 
 @implementation DocumentViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Initialization code here.
-    }
+- (id)init {
+ 
+    NSString* nib = NSStringFromClass([self class]);
+    self = [super initWithNibName:nib bundle:nil];
     return self;
+    
 }
 
 @end

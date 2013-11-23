@@ -8,6 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-@interface FileSystemItem : NSObject
+@interface ProjectItem : NSObject
+
+@property(nonatomic,readonly,copy) NSString* relativePath;
+@property(nonatomic,readonly) NSString* fullPath;
+@property(nonatomic,readonly,strong) ProjectItem* parent;
+@property(nonatomic,readonly) NSString* displayName;
+@property(nonatomic,readonly,assign) BOOL isDir;
+@property(nonatomic,readonly,assign) BOOL isValid;
+@property(nonatomic,readonly,strong) NSArray* children;
+@property(nonatomic,strong) NSDocument* document;
+
+- (id)initWithProjectURL:(NSURL*)url;
 
 @end

@@ -8,6 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 
+#define DocumentNeedWindowNotification @"TSDocumentNeedWindowNotification"
+
 @interface FileDocument : NSDocument
+
+-(NSViewController *)newPrimaryViewController;
 
 @end
