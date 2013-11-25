@@ -14,8 +14,8 @@
 		22778C97116AA89E001C0ECD /* Help in Resources */ = {isa = PBXBuildFile; fileRef = 22778C91116AA89E001C0ECD /* Help */; };
 		6D36490C18273DBD009365FF /* LogTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D36490B18273DBD009365FF /* LogTextView.m */; };
 		6D4E8BF0183FDE1C00C6B0CC /* main.js in Copy Project Javascript Template */ = {isa = PBXBuildFile; fileRef = 6D4E8BEE183FDD7B00C6B0CC /* main.js */; };
-		6D4E8BF3183FDE6A00C6B0CC /* motions.js in Sources */ = {isa = PBXBuildFile; fileRef = 6D4E8BF2183FDE6A00C6B0CC /* motions.js */; };
-		6D4E8BF4183FDE7600C6B0CC /* motions.js in Copy Project Motions Template */ = {isa = PBXBuildFile; fileRef = 6D4E8BF2183FDE6A00C6B0CC /* motions.js */; };
+		6D4E8BF3183FDE6A00C6B0CC /* motions.dm in Sources */ = {isa = PBXBuildFile; fileRef = 6D4E8BF2183FDE6A00C6B0CC /* motions.dm */; };
+		6D4E8BF4183FDE7600C6B0CC /* motions.dm in Copy Project Motions Template */ = {isa = PBXBuildFile; fileRef = 6D4E8BF2183FDE6A00C6B0CC /* motions.dm */; };
 		6D4EF7811836E9AC00A1294A /* ProjectDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4EF77D1836E9AC00A1294A /* ProjectDocument.m */; };
 		6D4EF7901836E9EB00A1294A /* Dynamixel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D4EF7851836E9EB00A1294A /* Dynamixel.mm */; };
 		6D4EF7911836E9EB00A1294A /* JSTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4EF7871836E9EB00A1294A /* JSTimer.m */; };
@@ -34,6 +34,12 @@
 		6D7637761828365400191B53 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D7637751828365400191B53 /* JavaScriptCore.framework */; };
 		6D7637821828BE1C00191B53 /* console.html in Resources */ = {isa = PBXBuildFile; fileRef = 6D7637811828BE1C00191B53 /* console.html */; };
 		6D94063D182E0AE200A01ADB /* Console.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D94063C182E0AE200A01ADB /* Console.m */; };
+		6DB34F2518408CC700B70D3C /* VDKQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DB34F2318408CC700B70D3C /* VDKQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6DB34F2B1842870500B70D3C /* Movie_Template.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DB34F291842870500B70D3C /* Movie_Template.png */; };
+		6DB34F2C1842870500B70D3C /* Movie_Template@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DB34F2A1842870500B70D3C /* Movie_Template@2x.png */; };
+		6DB34F311842A2E200B70D3C /* MotionEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DB34F2F1842A2E200B70D3C /* MotionEditorController.m */; };
+		6DB34F321842A2E200B70D3C /* MotionEditorController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DB34F301842A2E200B70D3C /* MotionEditorController.xib */; };
+		6DB34F361842AC3A00B70D3C /* MotionDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DB34F341842AC3A00B70D3C /* MotionDocument.m */; };
 		6DCCFEE11831946200D4E0C3 /* ControlPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DCCFEDF1831946200D4E0C3 /* ControlPanelController.m */; };
 		6DCCFEE21831946200D4E0C3 /* ControlPanelController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DCCFEE01831946200D4E0C3 /* ControlPanelController.xib */; };
 		6DCCFEEA1831969F00D4E0C3 /* USB_Template.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DCCFEE81831969F00D4E0C3 /* USB_Template.png */; };
@@ -116,7 +122,7 @@
 			dstPath = Contents/ProjectTemplate/motions;
 			dstSubfolderSpec = 1;
 			files = (
-				6D4E8BF4183FDE7600C6B0CC /* motions.js in Copy Project Motions Template */,
+				6D4E8BF4183FDE7600C6B0CC /* motions.dm in Copy Project Motions Template */,
 			);
 			name = "Copy Project Motions Template";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -149,7 +155,7 @@
 		6D36490A18273DBD009365FF /* LogTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogTextView.h; sourceTree = "<group>"; };
 		6D36490B18273DBD009365FF /* LogTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogTextView.m; sourceTree = "<group>"; };
 		6D4E8BEE183FDD7B00C6B0CC /* main.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = main.js; sourceTree = "<group>"; };
-		6D4E8BF2183FDE6A00C6B0CC /* motions.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = motions.js; sourceTree = "<group>"; };
+		6D4E8BF2183FDE6A00C6B0CC /* motions.dm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = motions.dm; sourceTree = "<group>"; };
 		6D4EF77C1836E9AC00A1294A /* ProjectDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectDocument.h; sourceTree = "<group>"; };
 		6D4EF77D1836E9AC00A1294A /* ProjectDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectDocument.m; sourceTree = "<group>"; };
 		6D4EF7841836E9EB00A1294A /* Dynamixel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dynamixel.h; sourceTree = "<group>"; };
@@ -182,6 +188,15 @@
 		6D7637811828BE1C00191B53 /* console.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = console.html; sourceTree = "<group>"; };
 		6D94063B182E0AE200A01ADB /* Console.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Console.h; sourceTree = "<group>"; };
 		6D94063C182E0AE200A01ADB /* Console.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Console.m; sourceTree = "<group>"; };
+		6DB34F2218408CC700B70D3C /* VDKQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VDKQueue.h; sourceTree = "<group>"; };
+		6DB34F2318408CC700B70D3C /* VDKQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VDKQueue.m; sourceTree = "<group>"; };
+		6DB34F291842870500B70D3C /* Movie_Template.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Movie_Template.png; sourceTree = "<group>"; };
+		6DB34F2A1842870500B70D3C /* Movie_Template@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Movie_Template@2x.png"; sourceTree = "<group>"; };
+		6DB34F2E1842A2E200B70D3C /* MotionEditorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionEditorController.h; sourceTree = "<group>"; };
+		6DB34F2F1842A2E200B70D3C /* MotionEditorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MotionEditorController.m; sourceTree = "<group>"; };
+		6DB34F301842A2E200B70D3C /* MotionEditorController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MotionEditorController.xib; sourceTree = "<group>"; };
+		6DB34F331842AC3A00B70D3C /* MotionDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionDocument.h; sourceTree = "<group>"; };
+		6DB34F341842AC3A00B70D3C /* MotionDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MotionDocument.m; sourceTree = "<group>"; };
 		6DCCFEDE1831946200D4E0C3 /* ControlPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlPanelController.h; sourceTree = "<group>"; };
 		6DCCFEDF1831946200D4E0C3 /* ControlPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlPanelController.m; sourceTree = "<group>"; };
 		6DCCFEE01831946200D4E0C3 /* ControlPanelController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ControlPanelController.xib; sourceTree = "<group>"; };
@@ -260,8 +275,10 @@
 		2A37F4ABFDCFA73011CA2CEA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				6DB34F2018408CC700B70D3C /* VDKQueue */,
 				6D517DDA18385431001B5704 /* KVO */,
 				6D4EF7831836E9EB00A1294A /* Javascript */,
+				6DB34F2D1842A2BC00B70D3C /* MotionEditor */,
 				6D4EF78A1836E9EB00A1294A /* ScriptEditor */,
 				6D4EF7771836E9AC00A1294A /* ProjectBrowser */,
 				22293AB6116E973300183C8B /* AppDelegate.h */,
@@ -329,7 +346,7 @@
 		6D4E8BEC183FDD7B00C6B0CC /* motions */ = {
 			isa = PBXGroup;
 			children = (
-				6D4E8BF2183FDE6A00C6B0CC /* motions.js */,
+				6D4E8BF2183FDE6A00C6B0CC /* motions.dm */,
 			);
 			path = motions;
 			sourceTree = "<group>";
@@ -397,9 +414,32 @@
 			path = KVO;
 			sourceTree = "<group>";
 		};
+		6DB34F2018408CC700B70D3C /* VDKQueue */ = {
+			isa = PBXGroup;
+			children = (
+				6DB34F2218408CC700B70D3C /* VDKQueue.h */,
+				6DB34F2318408CC700B70D3C /* VDKQueue.m */,
+			);
+			path = VDKQueue;
+			sourceTree = "<group>";
+		};
+		6DB34F2D1842A2BC00B70D3C /* MotionEditor */ = {
+			isa = PBXGroup;
+			children = (
+				6DB34F2E1842A2E200B70D3C /* MotionEditorController.h */,
+				6DB34F2F1842A2E200B70D3C /* MotionEditorController.m */,
+				6DB34F301842A2E200B70D3C /* MotionEditorController.xib */,
+				6DB34F331842AC3A00B70D3C /* MotionDocument.h */,
+				6DB34F341842AC3A00B70D3C /* MotionDocument.m */,
+			);
+			path = MotionEditor;
+			sourceTree = "<group>";
+		};
 		6DCCFEE71831969F00D4E0C3 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6DB34F291842870500B70D3C /* Movie_Template.png */,
+				6DB34F2A1842870500B70D3C /* Movie_Template@2x.png */,
 				6DE7BA6B1831B04C00369988 /* robot_Template.png */,
 				6DE7BA631831AFAB00369988 /* Play_Template.png */,
 				6DE7BA641831AFAB00369988 /* Play_Template@2x.png */,
@@ -529,8 +569,11 @@
 				6DE7BA6C1831B04C00369988 /* robot_Template.png in Resources */,
 				8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */,
 				6D517DD91837FE0B001B5704 /* DocumentViewController.xib in Resources */,
+				6DB34F321842A2E200B70D3C /* MotionEditorController.xib in Resources */,
+				6DB34F2C1842870500B70D3C /* Movie_Template@2x.png in Resources */,
 				6DCCFEEE183197CA00D4E0C3 /* New_Template.png in Resources */,
 				6DCCFEEA1831969F00D4E0C3 /* USB_Template.png in Resources */,
+				6DB34F2B1842870500B70D3C /* Movie_Template.png in Resources */,
 				6DE7BA681831AFAB00369988 /* Play_Template@2x.png in Resources */,
 				1DDD582C0DA1D0D100B32029 /* MyDocument.xib in Resources */,
 				6DE7BA691831AFAB00369988 /* Stop_Template.png in Resources */,
@@ -563,9 +606,11 @@
 				6D4EF7911836E9EB00A1294A /* JSTimer.m in Sources */,
 				8D15AC320486D014006FF6A4 /* main.m in Sources */,
 				6D4EF7A418373FC700A1294A /* ProjectItem.m in Sources */,
-				6D4E8BF3183FDE6A00C6B0CC /* motions.js in Sources */,
+				6D4E8BF3183FDE6A00C6B0CC /* motions.dm in Sources */,
 				6D517DD81837FE0B001B5704 /* DocumentViewController.m in Sources */,
 				6DCCFEE11831946200D4E0C3 /* ControlPanelController.m in Sources */,
+				6DB34F311842A2E200B70D3C /* MotionEditorController.m in Sources */,
+				6DB34F361842AC3A00B70D3C /* MotionDocument.m in Sources */,
 				22293AB8116E973300183C8B /* AppDelegate.m in Sources */,
 				6D4EF7921836E9EB00A1294A /* JSWrapper.m in Sources */,
 				6D94063D182E0AE200A01ADB /* Console.m in Sources */,
@@ -576,6 +621,7 @@
 				6D4EF7811836E9AC00A1294A /* ProjectDocument.m in Sources */,
 				6D517DDD18385431001B5704 /* NSObject+SimpleKVO.m in Sources */,
 				6D517DE218388962001B5704 /* CodeDocument.m in Sources */,
+				6DB34F2518408CC700B70D3C /* VDKQueue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

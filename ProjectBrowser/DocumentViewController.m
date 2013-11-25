@@ -17,7 +17,7 @@
 - (id)init {
  
     NSString* nib = NSStringFromClass([self class]);
-    self = [super initWithNibName:nib bundle:nil];
+    self = [self initWithNibName:nib bundle:nil];
     return self;
     
 }

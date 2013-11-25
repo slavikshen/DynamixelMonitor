@@ -36,7 +36,7 @@
 - (IBAction)textFieldAction:(id)sender;
 - (void)applicationDidFinishLaunching:(NSNotification *)notification;
 
-//- (IBAction)openDocument:(id)sender;
-//- (IBAction)newDocument:(id)sender;
+- (IBAction)connect:(id)sender;
+- (IBAction)showPuppet:(id)sender;
 
 @end

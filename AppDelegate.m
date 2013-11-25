@@ -24,6 +24,7 @@
 #import "JSWrapper.h"
 #import "ControlPanelController.h"
 #import "FileDocument.h"
+#import "Dynamixel.h"
 
 #define defaultValue @"/dev/tty.usbserial-AD01UY2K"
 #define myKey @"device"
@@ -124,5 +125,26 @@
     }
 }
 
+- (IBAction)showPuppet:(id)sender {
+
+    ControlPanelController* controlPanelController = self.controlPanelController;
+    if( nil == controlPanelController ) {
+        controlPanelController = [[ControlPanelController alloc] initWithWindowNibName:@"ControlPanelController"];
+        self.controlPanelController = controlPanelController;
+    }
+    [controlPanelController.window makeKeyAndOrderFront:nil];
+    
+}
+
+- (IBAction)connect:(id)sender {
+ 
+    Dynamixel* d = [Dynamixel sharedInstance];
+    if( [d isConnected] ) {
+        [d disconnect];
+    } else {
+        [d connect];
+    }
+    
+}
 
 @end

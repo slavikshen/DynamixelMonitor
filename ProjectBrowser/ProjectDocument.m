@@ -7,7 +7,6 @@
 //
 
 #import "ProjectDocument.h"
-#import "ProjectDocument+Outline.h"
 #import "ProjectWindowController.h"
 
 NSString* const ProjectDocumentProperty_FileURL = @"fileURL";

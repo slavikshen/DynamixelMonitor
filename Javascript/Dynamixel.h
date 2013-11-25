@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MotionDocument.h"
 
+APPKIT_EXTERN NSString* const kDynamixelProperty_Connected;
+APPKIT_EXTERN NSString* const kDynamixelProperty_TorqueEnabled;
 
-
-@interface ServoInfo : NSObject
+@interface ServoInfo : NSObject<NSCopying,NSCoding>
 
 @property(nonatomic,assign) NSInteger sid;
 @property(nonatomic,assign) NSInteger speed;
@@ -78,8 +80,9 @@
 @property(nonatomic,strong) NSArray* currentFrames;
 @property(nonatomic,assign) NSUInteger currentFrameIndex;
 
-
 +(Dynamixel*)sharedInstance;
 
+- (void)setMotion:(Motion*)m;
+- (Motion*)readMotion;
 
 @end

@@ -102,7 +102,7 @@
     if( NSNotFound == dotPost ) {
         return YES;
     }
-    if( [fileName hasSuffix:@".js"] ) {
+    if( [fileName hasSuffix:@".js"] || [fileName hasSuffix:@".dm"] ) {
         return YES;
     }
     

@@ -29,8 +29,14 @@
 @property(nonatomic,strong) IBOutlet NSSplitView* editorSplitView;
 
 @property(nonatomic,strong) IBOutlet LogTextView* logView;
-@property(nonatomic,strong) IBOutlet JSWrapper* jsWrapper;
+@property(nonatomic,strong) JSWrapper* jsWrapper;
+
+@property(nonatomic,strong) IBOutlet NSMenu* outlineItemMenu;
+@property(nonatomic,strong) IBOutlet NSToolbarItem* connectToolbarItem;
 
 - (IBAction)saveDocument:(id)sender;
+- (IBAction)showInFinder:(id)sender;
+- (IBAction)deleteDocument:(id)sender;
+
 
 @end

@@ -11,6 +11,9 @@
 #include "DynamixelComm.h"
 
 
+NSString* const kDynamixelProperty_Connected = @"connected";
+NSString* const kDynamixelProperty_TorqueEnabled = @"torqueEnabled";
+
 @implementation ServoInfo {
  
     unsigned char _servoData[128];
@@ -48,6 +51,88 @@
     self.temperature = temperature;
     self.torque = torque;
         
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+ 
+    ServoInfo* s = [[ServoInfo alloc] init];
+    
+    if (s) {
+    
+        s.sid = self.sid;
+        s.position = self.position;
+        s.speed = self.speed;
+        s.load = self.load;
+        s.voltage = self.voltage;
+        s.temperature = self.temperature;
+        s.torque = self.torque;
+        
+        memcpy(s->_servoData,self->_servoData,sizeof(unsigned char)*128);
+        
+    }
+    
+    return s;
+    
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+
+    NSInteger sid = self.sid;
+    NSInteger position = self.position;
+    NSInteger speed = self.speed;
+    NSInteger load = self.load;
+    NSInteger voltage = self.voltage;
+    NSInteger temperature = self.temperature;
+    NSInteger torque = self.torque;
+    
+    [aCoder encodeInteger:sid forKey:@"sid"];
+    if( position ) {
+        [aCoder encodeInteger:position forKey:@"position"];
+    }
+    if( speed ) {
+        [aCoder encodeInteger:speed forKey:@"speed"];
+    }
+    if( load ) {
+        [aCoder encodeInteger:load forKey:@"load"];
+    }
+    if( voltage ) {
+        [aCoder encodeInteger:voltage forKey:@"voltage"];
+    }
+    if( temperature ) {
+        [aCoder encodeInteger:temperature forKey:@"temperature"];
+    }
+    if( torque ) {
+        [aCoder encodeInteger:torque forKey:@"torque"];
+    }
+    
+    
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    
+    self = [super init];
+    if( self ) {
+        
+        NSInteger sid = [aDecoder decodeIntegerForKey:@"sid"];
+        NSInteger position = [aDecoder decodeIntegerForKey:@"position"];
+        NSInteger speed = [aDecoder decodeIntegerForKey:@"speed"];
+        NSInteger load = [aDecoder decodeIntegerForKey:@"load"];
+        NSInteger voltage = [aDecoder decodeIntegerForKey:@"voltage"];
+        NSInteger temperature = [aDecoder decodeIntegerForKey:@"temperature"];
+        NSInteger torque = [aDecoder decodeIntegerForKey:@"torque"];
+        
+        self.sid = sid;
+        self.position = position;
+        self.speed = speed;
+        self.load = load;
+        self.voltage = voltage;
+        self.temperature = temperature;
+        self.torque = torque;
+        
+    }
+    
+    return self;
+    
 }
 
 @end
@@ -92,6 +177,7 @@
 }
 
 - (void)_setup {
+    self.torqueEnabled = YES;
     self.servos = [NSMutableDictionary dictionaryWithCapacity:128];
     self.timers = [NSMutableDictionary dictionaryWithCapacity:128];
     self.frameInterval = 1;
@@ -224,6 +310,27 @@
     
     int sid = servoID;
     dc->Move(sid, p, s);
+    
+    if( !self.torqueEnabled ) {
+        self.torqueEnabled = YES;
+    }
+
+}
+
+- (void)setPosition:(NSInteger)pos ofServo:(NSInteger)servoID speed:(NSInteger)s {
+    
+    ServoInfo* servo = self.servos[@(servoID)];
+    int p = pos;
+    if( s <= 0 || s >= 1024 ) {
+        s = 100;
+    }
+    servo.position = pos;
+    int sid = servoID;
+    dc->Move(sid, p, s);
+    
+    if( !self.torqueEnabled ) {
+        self.torqueEnabled = YES;
+    }
 }
 
 - (NSInteger)positionOfServo:(NSInteger)servoID {
@@ -351,6 +458,8 @@
         if( [value isKindOfClass:[NSDictionary class]] ) {
             NSDictionary* postions = value;
             [self setStatus:postions];
+        } else if( [value isKindOfClass:[Motion class]] ) {
+            [self setMotion:value];
         }
         
         self.currentFrameIndex = currIndex;
@@ -365,5 +474,41 @@
     [self clearAllTimer];
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(_playNextFrame) object:nil];
 }
+
+- (void)setMotion:(Motion*)m {
+ 
+    NSInteger speed = m.speed;
+    NSArray* servos = m.motions;
+    for( ServoInfo* s in servos ) {
+        [self setPosition:s.position ofServo:s.sid speed:speed];
+    }
+    
+}
+
+- (Motion*)readMotion {
+    
+    NSMutableArray* buf = [NSMutableArray arrayWithCapacity:32];
+    
+    NSArray* ids = self.servos.allKeys;
+    for( NSNumber* idNum in ids ) {
+        
+        NSInteger sid = [idNum integerValue];
+        
+        unsigned char servoData[128];
+        dc->ReadAllData(sid, servoData);
+        
+        ServoInfo* servo = [[ServoInfo alloc] init];
+        servo.sid = sid;
+        [servo updateWithRawData:servoData];
+        
+        [buf addObject:servo];
+    }
+    
+    Motion* m = [[Motion alloc] init];
+    m.motions = buf;
+    
+    return m;
+}
+
 
 @end

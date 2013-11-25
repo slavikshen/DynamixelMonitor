@@ -10,8 +10,12 @@
 #import "ProjectDocument.h"
 #import "ProjectItem.h"
 #import "FileDocument.h"
+
 #import "CodeViewController.h"
+#import "MotionEditorController.h"
+
 #import "Dynamixel.h"
+#import "VDKQueue.h"
 
 #define kIconImageSize 16.0f
 #define kMinOutlineViewSplit	200.0f
@@ -19,9 +23,11 @@
 NSString* const ProjectWindowControllerProperty_Document = @"document";
 NSString* const ProjectWindowControllerProperty_Running = @"running";
 
-@interface ProjectWindowController ()
+@interface ProjectWindowController ()<VDKQueueDelegate>
 
 @property (nonatomic,assign) ProjectDocument* projDocument;
+@property(nonatomic,strong) VDKQueue* projectDirMonitor;
+
 @property(nonatomic,strong) NSCache* docViewControllers;
 
 @end
@@ -59,18 +65,36 @@ NSString* const ProjectWindowControllerProperty_Running = @"running";
         [self addObserver:self
              constantKeys:@[ProjectWindowControllerProperty_Document,
                             ProjectWindowControllerProperty_Running]];
+        
+        Dynamixel* d = [Dynamixel sharedInstance];
+        [d addObserver:self constantKeys:@[kDynamixelProperty_Connected]];
 
     }
     return self;
+}
+
+- (void)dealloc {
+
+    Dynamixel* d = [Dynamixel sharedInstance];
+    [d removeObserver:self constantKeys:@[kDynamixelProperty_Connected]];
+    
+    self.projDocument = nil;
+    [self removeObserver:self constantKeys:@[ProjectWindowControllerProperty_Document,
+                                             ProjectWindowControllerProperty_Running]];
+    
+    
 }
 
 - (void)windowDidLoad
 {
     [super windowDidLoad];
     
+    VDKQueue* monitor = [[VDKQueue alloc] init];
+    monitor.delegate = self;
+    self.projectDirMonitor = monitor;
+    
     NSCache* viewControllerCache = [[NSCache alloc] init];
     self.docViewControllers = viewControllerCache;
-    
     
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
     ProjectDocument* pdoc = self.projDocument;
@@ -88,6 +112,7 @@ NSString* const ProjectWindowControllerProperty_Running = @"running";
     [self _addDocument:pdoc.projectItem];
     
     [self _updateDebugStatus];
+    [self _updateConnectionStatus];
     
     [self _collapseDebugView];
     
@@ -137,7 +162,15 @@ NSString* const ProjectWindowControllerProperty_Running = @"running";
     docViewController = [cache objectForKey:path];
     if( nil == docViewController ) {
         //TODO: add more document type check here
-        docViewController = [[CodeViewController alloc] init];
+        
+        NSString* type = doc.fileType;
+        if( [type isEqualToString:@"Motion"] ) {
+            docViewController = [[MotionEditorController alloc] init];
+        } else {
+            docViewController = [[CodeViewController alloc] init];
+        }        
+        
+        
         docViewController.document = doc;
         [self.docViewControllers setObject:docViewController forKey:path];
         [doc addWindowController:self];
@@ -182,7 +215,11 @@ NSString* const ProjectWindowControllerProperty_Running = @"running";
                          constantKeys:@[
                                         ProjectDocumentProperty_FileURL
                                         ]];
-        [_projDocument removeObserver:self forKeyPath:@"projectName"];
+        NSString* path = _projDocument.fileURL.path;
+        NSString* prjPath = [path stringByDeletingLastPathComponent];
+        
+        VDKQueue* monitor = self.projectDirMonitor;
+        [monitor removePath:prjPath];
     }
     
     _projDocument = projDocument;
@@ -196,13 +233,17 @@ NSString* const ProjectWindowControllerProperty_Running = @"running";
                        constantKeys:@[
                                       ProjectDocumentProperty_FileURL
                                       ]];
+
+        NSURL* url = _projDocument.fileURL;
+        NSString* path = url.path;
+        NSString* prjPath = [path stringByDeletingLastPathComponent];
+        VDKQueue* monitor = self.projectDirMonitor;
+        [monitor addPath:prjPath notifyingAbout:VDKQueueNotifyAboutRename|VDKQueueNotifyAboutLinkCountChanged];
         
         if( [self isWindowLoaded] ) {
             
             NSWindow* win = self.window;
-            NSURL* url = _projDocument.fileURL;
-            if( url ) {
-                NSString* path = url.path;
+            if( path ) {
                 NSString* filename = [path lastPathComponent];
                 [win setFrameAutosaveName:_F(@"dm_%@",filename)];
                 win.title = filename;
@@ -247,6 +288,34 @@ NSString* const ProjectWindowControllerProperty_Running = @"running";
     
 }
 
+- (IBAction)showInFinder:(id)sender {
+ 
+    NSOutlineView* outline = self.outlineView;
+    NSInteger row = outline.clickedRow;
+    
+    ProjectItem* item = [outline itemAtRow:row];
+    NSString* path = item.fullPath;
+    
+    NSArray *fileURLs = @[[NSURL URLWithString:_F(@"file://%@",path)]];
+    [[NSWorkspace sharedWorkspace] activateFileViewerSelectingURLs:fileURLs];
+    
+}
+
+- (IBAction)deleteDocument:(id)sender {
+    
+    NSOutlineView* outline = self.outlineView;
+    NSInteger row = outline.clickedRow;
+    
+    ProjectItem* item = [outline itemAtRow:row];
+    NSString* path = item.fullPath;
+
+    NSFileManager* fm = [NSFileManager defaultManager];
+    NSError* err = nil;
+    [fm removeItemAtPath:path error:&err];
+    
+}
+
+
 // Each document needs to be detached from the window controller before the window closes.
 // In addition, any references to those documents from any child view controllers will also
 // need to be cleared in order to ensure a proper cleanup.
@@ -262,6 +331,9 @@ NSString* const ProjectWindowControllerProperty_Running = @"running";
     if (notification.object != window) {
         return;
     }
+    
+    self.projectDirMonitor.delegate = nil;
+    self.projectDirMonitor = nil;
     
     // let's keep a reference to ourself and not have us thrown away while we clear out references.
     [self _closeDocument:self.projDocument.projectItem];
@@ -329,6 +401,20 @@ NSString* const ProjectWindowControllerProperty_Running = @"running";
     
 }
 
+- (void)_updateConnectionStatus {
+ 
+    Dynamixel* d = [Dynamixel sharedInstance];
+    BOOL connected = d.connected;
+    
+    NSString* title = @"Connect";
+    if( connected ) {
+        title = @"Disconnect";
+    }
+    
+    self.connectToolbarItem.label = title;
+    
+}
+
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
                         change:(NSDictionary *)change
@@ -340,6 +426,8 @@ NSString* const ProjectWindowControllerProperty_Running = @"running";
         [self _updateDocumentWindowInfo];
     } else if( (__bridge void*)ProjectWindowControllerProperty_Running == context ) {
         [self _updateDebugStatus];
+    } else if( (__bridge void*)kDynamixelProperty_Connected == context ) {
+        [self _updateConnectionStatus];
     } else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
@@ -520,6 +608,7 @@ forDoubleClickOnDividerAtIndex:(NSInteger)dividerIndex {
         NSString* displayName = [pItem displayName];
         view.textField.stringValue = displayName;
         view.imageView.image = icon;
+        view.menu = self.outlineItemMenu;
     }
     
     return view;
@@ -528,6 +617,12 @@ forDoubleClickOnDividerAtIndex:(NSInteger)dividerIndex {
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification {
  
     [self _switchToSelectedDocumentIfPossible];
+    
+}
+
+#pragma mark - project directory monitor
+
+-(void) VDKQueue:(VDKQueue *)queue receivedNotification:(NSString*)noteName forPath:(NSString*)fpath {
     
 }
 
